@@ -1,1 +1,20 @@
-<p>navbar works!</p>
+
+<mat-toolbar id="navbar" color="primary" style="background-color: rgb(127, 0, 0);color:white">
+    <a
+    routerLink="/"
+    mat-icon-button
+    class="example-icon mr30"
+    aria-label="Example icon-button with menu icon"
+  ><mat-icon>home</mat-icon>
+  Home
+</a>
+<span class="spacer"></span>
+<a
+    [routerLink]="'/login'"
+    mat-icon-button
+    class="example-icon favorite-icon mr30"
+  >
+    <mat-icon>login</mat-icon>
+    Login
+  </a>
+</mat-toolbar>
