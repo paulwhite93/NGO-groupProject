@@ -1,3 +1,4 @@
+import { Donation } from "./Donation";
 import { DonationType } from "./DonationType";
 import { Donator } from "./Donator";
 
@@ -6,11 +7,11 @@ export interface ShoppingCart{
     
     Quantity: number,
 
-    price: number,
+    price: Donation["amount"],
 
     total: number,
 
-    itemDescription?:DonationType,
+    itemDescription?: Donation["donationType"],
 
-    donor?: Donator, 
+    donor?: Donation["donor"], 
 }

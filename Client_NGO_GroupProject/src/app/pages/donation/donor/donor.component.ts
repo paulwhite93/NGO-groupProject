@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Donator } from 'src/app/Model/Donator';
 
 @Component({
   selector: 'app-donor',
@@ -27,8 +28,11 @@ export class DonorComponent {
     //on submit we want to send the donor form to the server 
     //and send to shopping cart and redirect to cart
     console.log(this.donorForm.value);
+    localStorage.setItem('donor', JSON.stringify(this.donorForm.value));
   }
   onCancel(){
     //return to previous page
+    console.log("cancel");
+    localStorage.removeItem('donor');
   }
 }
