@@ -16,6 +16,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { ViewUsersComponent } from './pages/admin/view-users/view-users.component';
 import { ViewDonationsComponent } from './pages/admin/view-donations/view-donations.component';
 import { AddDonationComponent } from './pages/admin/add-donation/add-donation.component';
+import { AdminWelcomeComponent } from './pages/admin/admin-welcome/admin-welcome.component';
+import { UserWelcomeComponent } from './pages/user/user-welcome/user-welcome.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { AddDonationComponent } from './pages/admin/add-donation/add-donation.co
     LoginComponent,
     ViewUsersComponent,
     ViewDonationsComponent,
-    AddDonationComponent
+    AddDonationComponent,
+    AdminWelcomeComponent,
+    UserWelcomeComponent
   ],
   imports: [
     FormsModule,
