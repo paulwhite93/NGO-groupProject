@@ -5,6 +5,6 @@ import { Donator } from "./Donator";
 //shopping cart model intended to be used in the checkout process.
 export interface ShoppingCart{
     items: Array<Donation>;
-    total: number;
-    monthlyTotal: number;
+    total: Number;
+    monthlyTotal: Number;
 }

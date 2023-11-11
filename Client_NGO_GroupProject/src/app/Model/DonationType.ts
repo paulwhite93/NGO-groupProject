@@ -1,6 +1,6 @@
 export interface DonationType{
 
-    id:number,
+    id:Number,
 
     type:string,
     

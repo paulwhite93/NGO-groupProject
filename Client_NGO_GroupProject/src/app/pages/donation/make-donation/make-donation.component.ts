@@ -56,7 +56,7 @@ public donor!: Donator;
     };
   }
   buildShoppingCart(){
-    let shoppingCart:any;
+    let shoppingCart:Array<any> = [];
     for (const i of this.formList.entries()){
       i[0].amount = i[1].get('amount')?.value;
       i[0].reoccuringDonation = i[1].get('reoccuringDonation')?.value;

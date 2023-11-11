@@ -9,6 +9,7 @@ import { ShoppingCart } from 'src/app/Model/ShoppingCart';
 })
 export class CheckoutComponent {
   public shoppingCart:any;
+  public displayedColumns: string[] = ['Item Description', 'Donation Amount', 'Monthly Recurring'];
   constructor(
 
   ){
@@ -29,18 +30,21 @@ export class CheckoutComponent {
     }
     console.log(this.shoppingCart);
   }
-  getCartTotal(data:any):number{
-    let sum:number = 0
-    data.forEach((element:Donation) => {
-      sum += element.amount;
+  getCartTotal(data:any):Number{
+    let sum:Number = 0
+    data.forEach((element:any) => {
+      let amount:any = parseFloat(element.amount);
+      sum = sum + amount;
     });
     return sum 
   } 
-  getCartMonthlyTotal(data:any):number{
-    let sum:number = 0
-    data.forEach((element:Donation) => {
-      if(element.reoccuringDonation)
-        sum += element.amount;
+  getCartMonthlyTotal(data:any):Number{
+    let sum:Number = 0
+    data.forEach((element:any) => {
+      if(element.reoccuringDonation){
+        let amount:any = parseFloat(element.amount);
+        sum = sum + amount;
+      }
     });
     return sum
   }
@@ -58,6 +62,7 @@ export class CheckoutComponent {
     this.shoppingCart.monthlyTotal=this.getCartMonthlyTotal(this.shoppingCart.items);
   }
   proceedToCheckout(){
+    //save all Donation records
     //return to home page
     //send email to user_email 
   }
