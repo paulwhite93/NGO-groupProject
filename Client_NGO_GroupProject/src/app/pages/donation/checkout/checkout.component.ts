@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Donation } from 'src/app/Model/Donation';
 import { ShoppingCart } from 'src/app/Model/ShoppingCart';
+import { DonationService } from 'src/app/services/donation.service';
 
 @Component({
   selector: 'app-checkout',
@@ -9,26 +11,29 @@ import { ShoppingCart } from 'src/app/Model/ShoppingCart';
 })
 export class CheckoutComponent {
   public shoppingCart:any;
-  public displayedColumns: string[] = ['Item Description', 'Donation Amount', 'Monthly Recurring'];
+  public displayedColumns: string[] = ['Item Description', 'Donation Amount', 'Monthly Recurring','Remove From Cart'];
   constructor(
+    private router:Router,
+    private donationService:DonationService){}
 
-  ){
-
-  }
   ngOnInit(){
     let data:any = localStorage.getItem('shoppingCart');
-    console.log(JSON.parse(data));
     data = JSON.parse(data);
     console.log(data);
-    data.forEach((order:Donation) => {
-      console.log(order);
-    });
-    this.shoppingCart = {
-      items:data,
-      total:this.getCartTotal(data),
-      monthlyTotal:this.getCartMonthlyTotal(data),
+    if(data) {
+      data.forEach((order:Donation) => {
+        console.log(order);
+      });
+      this.shoppingCart = {
+        items:data,
+        total:this.getCartTotal(data),
+        monthlyTotal:this.getCartMonthlyTotal(data),
+      }
+      console.log(this.shoppingCart);
     }
-    console.log(this.shoppingCart);
+    else{
+      this.router.navigate(['']);
+    }
   }
   getCartTotal(data:any):Number{
     let sum:Number = 0
@@ -49,24 +54,35 @@ export class CheckoutComponent {
     return sum
   }
   emptyCart(){
+    this.shoppingCart.items = [];
+    this.shoppingCart.total = 0;
+    this.shoppingCart.monthlyTotal = 0;
     localStorage.removeItem('shoppingCart');
-    this.shoppingCart = null;
   }
-  UpdateCart(){
+  updateCart(){
     //modify the cart data
     //need to parse into shoppingCart.items to modify a specific entry
-
+    this.router.navigate(['makedonation']);
     //modify amount
     //modify if monthly
-    this.shoppingCart.total=this.getCartTotal(this.shoppingCart.items);
-    this.shoppingCart.monthlyTotal=this.getCartMonthlyTotal(this.shoppingCart.items);
+  }
+  removeFromCart(item:any){
+    console.log(item);
+    this.shoppingCart.items.splice(this.shoppingCart.items.indexOf(item),1);
+    console.log(this.shoppingCart.items);
+    localStorage.setItem('shoppingCart', JSON.stringify(this.shoppingCart.items));
+    this.router.navigate(['checkout']).then(()=>{
+      window.location.reload();
+    });
   }
   proceedToCheckout(){
     //save all Donation records
     //return to home page
     //send email to user_email 
+    this.router.navigate(['home']);
   }
   continueShopping(){
     //return to Make-Donation
+    this.router.navigate(['makedonation'])
   }
 }

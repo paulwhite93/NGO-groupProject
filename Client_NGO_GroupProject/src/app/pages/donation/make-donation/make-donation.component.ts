@@ -37,13 +37,33 @@ public donor!: Donator;
   }
   buildDonationMap(types:any){
     //build map of donations and formgroups
-    types.forEach((e: DonationType) => {
-      let donation = this.createDonation(e);
-      this.formList.set(donation,new FormGroup({
-        amount:new FormControl(),
-        reoccuringDonation:new FormControl(false)
-      }))
-    });
+    if(localStorage.getItem('shoppingCart')!=null){
+      //retrieve and populate donation fields
+      let data:any = localStorage.getItem('shoppingCart');
+      let shoppingCart = JSON.parse(data);
+
+      types.forEach((e: DonationType) => {
+        var donation = this.createDonation(e);
+        shoppingCart.forEach((d:Donation)=>{
+          if (donation.donationType.type == d.donationType.type){
+            donation = d;
+          }
+        });
+        this.formList.set(donation,new FormGroup({
+          amount:new FormControl(donation.amount),
+          reoccuringDonation:new FormControl(donation.reoccuringDonation)
+        }))
+      });
+    }
+    else{
+      types.forEach((e: DonationType) => {
+        let donation = this.createDonation(e);
+        this.formList.set(donation,new FormGroup({
+          amount:new FormControl(donation.amount),
+          reoccuringDonation:new FormControl(donation.reoccuringDonation)
+        }))
+      });
+    }
     console.log(this.formList);
   }
   createDonation(donationType:DonationType):Donation{
@@ -69,12 +89,16 @@ public donor!: Donator;
       this.continue();
     }
   }
+  retrieveShoppingCart(data:any){
+    
+  }
   continue(){
-
+    this.router.navigate(['checkout']);
   }
   onCancel(){
     localStorage.removeItem('donor');
     //return to user home page
+    this.router.navigate(['home']);
   }
   
 }

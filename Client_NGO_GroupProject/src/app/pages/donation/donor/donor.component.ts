@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Donator } from 'src/app/Model/Donator';
+import { DonationService } from 'src/app/services/donation.service';
 
 @Component({
   selector: 'app-donor',
@@ -8,6 +10,10 @@ import { Donator } from 'src/app/Model/Donator';
   styleUrls: ['./donor.component.css']
 })
 export class DonorComponent {
+
+  constructor(
+    private router:Router,
+    private donationService:DonationService){}
 
   donorForm = new FormGroup({
     firstName: new FormControl(),
@@ -29,10 +35,12 @@ export class DonorComponent {
     //and send to shopping cart and redirect to cart
     console.log(this.donorForm.value);
     localStorage.setItem('donor', JSON.stringify(this.donorForm.value));
+    this.router.navigate(['makedonation']);
   }
   onCancel(){
     //return to previous page
     console.log("cancel");
     localStorage.removeItem('donor');
+    this.router.navigate(['home']);
   }
 }
