@@ -66,10 +66,15 @@ public donor!: Donator;
     }
     if(shoppingCart.length > 0){
       localStorage.setItem('shoppingCart',JSON.stringify(shoppingCart));
+      this.continue();
     }
   }
   continue(){
 
+  }
+  onCancel(){
+    localStorage.removeItem('donor');
+    //return to user home page
   }
   
 }
