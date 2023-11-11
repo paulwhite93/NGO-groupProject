@@ -18,6 +18,8 @@ import { ViewDonationsComponent } from './pages/admin/view-donations/view-donati
 import { AddDonationComponent } from './pages/admin/add-donation/add-donation.component';
 import { AdminWelcomeComponent } from './pages/admin/admin-welcome/admin-welcome.component';
 import { UserWelcomeComponent } from './pages/user/user-welcome/user-welcome.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,7 @@ import { UserWelcomeComponent } from './pages/user/user-welcome/user-welcome.com
     ViewDonationsComponent,
     AddDonationComponent,
     AdminWelcomeComponent,
-    UserWelcomeComponent
+    UserWelcomeComponent,
   ],
   imports: [
     FormsModule,
@@ -42,9 +44,11 @@ import { UserWelcomeComponent } from './pages/user/user-welcome/user-welcome.com
     MaterialModule,
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatTooltipModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
