@@ -22,6 +22,7 @@ public class UserDTO {
         u.setName(users.getName());
         u.setPassword(this.bCryptPasswordEncoder.encode(users.getPassword()));
         System.out.println("In DTO: "+users.getRoles());
+	u.setEmail(users.getEmail());
         u.setRoles(roleDTO.roleModelToEntity(users.getRoles()));
         
         return u;
