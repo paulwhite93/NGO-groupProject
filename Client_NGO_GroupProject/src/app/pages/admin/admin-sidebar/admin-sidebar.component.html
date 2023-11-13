@@ -1,0 +1,30 @@
+<mat-sidenav-container>
+    <mat-card class="mt50">
+        <mat-action-list>
+            <div mat-subheader>Menu</div>
+            
+            <button mat-list-item routerLink="/admin">
+                <mat-icon mat-list-icon>home</mat-icon>
+                Home
+            </button>
+            <button mat-list-item routerLink="/admin/add-donation">
+                <mat-icon mat-list-icon>account_circle</mat-icon>
+                Add Donation Types
+            </button>
+            <button mat-list-item routerLink="/admin/view-donations">
+                <mat-icon mat-list-icon>list</mat-icon>
+                View Donations
+            </button>
+            <button mat-list-item routerLink="/admin/view-users">
+                <mat-icon mat-list-icon>add_circle</mat-icon>
+                View Users
+            </button>
+
+            <!-- (click)="logout()" *ngIf="isLoggedIn" -->
+            <button mat-list-item>
+                <mat-icon mat-list-icon>logout</mat-icon>
+                Log out
+            </button>
+        </mat-action-list>
+    </mat-card>
+</mat-sidenav-container>

@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin-welcome.component.css']
 })
 export class AdminWelcomeComponent {
-
+  
+  name = "Admin Name";
+  
 }

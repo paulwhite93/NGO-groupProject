@@ -20,6 +20,8 @@ import { AdminWelcomeComponent } from './pages/admin/admin-welcome/admin-welcome
 import { UserWelcomeComponent } from './pages/user/user-welcome/user-welcome.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { AdminSidebarComponent } from './pages/admin/admin-sidebar/admin-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     AddDonationComponent,
     AdminWelcomeComponent,
     UserWelcomeComponent,
+    AdminSidebarComponent
   ],
   imports: [
     FormsModule,
@@ -47,6 +50,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     BrowserAnimationsModule,
     MatButtonModule,
     MatTooltipModule,
+    MatSidenavModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

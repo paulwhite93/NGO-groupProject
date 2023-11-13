@@ -31,7 +31,7 @@ const routes: Routes = [
     path: 'admin',
     component: AdminWelcomeComponent,
     children: [
-      { path: '', component: AdminWelcomeComponent },
+      // { path: '', component: AdminWelcomeComponent },
       { path: 'add-donation', component: AddDonationComponent },
       { path: 'view-donations', component: ViewDonationsComponent },
       { path: 'view-users', component: ViewUsersComponent },
