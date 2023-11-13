@@ -34,10 +34,10 @@ public class Donations {
 	private Date date;
 	@ManyToOne
     @JoinColumn(name = "donationType_id" , referencedColumnName = "id")
-    private Donation_Types donationType;
+    private Donation_Types donation_types;
 	@ManyToOne
     @JoinColumn(name = "user_id" , referencedColumnName = "id")
-    private Users user;
+    private Users users;
 	
 	
 }

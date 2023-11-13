@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Entity
 @Table(name="donor")
@@ -22,26 +23,17 @@ public class Donors {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO) 
 	private int id;
-	@Column
+	@NonNull
 	private String firstName;
-	@Column
 	private String lastName;
-	@Column
 	private String CMA;
-	@Column
 	private String phone;
-	@Column
 	private String email;
-	@Column
 	private String address1;
-	@Column
 	private String address2;
-	@Column
 	private String city;
-	@Column
 	private String zip;
-	@Column
 	private String country;
-	@Column
 	private String urbanization;
+	
 }

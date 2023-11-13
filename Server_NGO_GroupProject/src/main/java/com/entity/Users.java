@@ -2,6 +2,7 @@ package com.entity;
 
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,6 +35,7 @@ public class Users {
 	@ManyToOne
     @JoinColumn(name = "role_id" , referencedColumnName = "id")
     private User_Roles roles;
+	@Column
 	@OneToMany(mappedBy = "users")
-    private Set<Donations> donation;
+    private Set<Donations> donations;
 }
