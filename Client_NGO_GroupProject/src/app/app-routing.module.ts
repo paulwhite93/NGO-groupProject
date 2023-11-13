@@ -8,24 +8,15 @@ import { ViewDonationsComponent } from './pages/admin/view-donations/view-donati
 import { ViewUsersComponent } from './pages/admin/view-users/view-users.component';
 import { AdminWelcomeComponent } from './pages/admin/admin-welcome/admin-welcome.component';
 import { UserWelcomeComponent } from './pages/user/user-welcome/user-welcome.component';
-
+import { MakeDonationComponent } from './pages/donation/make-donation/make-donation.component';
+import { CheckoutComponent } from './pages/donation/checkout/checkout.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: HomeComponent,
-    pathMatch: 'full'
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-    pathMatch: 'full'
-  },
-  {
-    path: 'donor',
-    component: DonorComponent,
-    pathMatch: 'full'
-  },
+  { path: '', component: HomeComponent, pathMatch: 'full' },
+  { path: 'login', component: LoginComponent, pathMatch: 'full' },
+  { path: 'donor', component: DonorComponent, pathMatch: 'full' },
+  { path: 'makedonation', component: MakeDonationComponent },
+  { path: 'checkout', component: CheckoutComponent},
   //ADMIN ROUTING
   {
     path: 'admin',
@@ -41,11 +32,10 @@ const routes: Routes = [
   {
     path: 'user',
     component: UserWelcomeComponent,
-    children: [
+    children: [  //dont really need child routes for user
+                //child routes are for when we want to nest components using app-routing
+                //which were not really doing in this case were just doing new pages
       { path: '', component: UserWelcomeComponent },
-      { path: 'donate', component: DonorComponent },
-      // { path: 'view-donations', component: ViewDonationsComponent },
-      // { path: 'view-users', component: ViewUsersComponent },
     ],
   },
 

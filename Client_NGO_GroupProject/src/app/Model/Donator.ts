@@ -5,7 +5,7 @@ export interface Donator{
 
     cma?: string,
 
-    phone:number,
+    phone:Number,
 
     email:string,
 

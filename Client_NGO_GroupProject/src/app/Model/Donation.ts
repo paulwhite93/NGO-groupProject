@@ -7,7 +7,7 @@ export interface Donation{
 
     date:Date,
 
-    amount:number,
+    amount:Number,
 
     donationType:DonationType,
     

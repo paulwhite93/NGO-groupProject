@@ -16,7 +16,7 @@
                 <div class="col-3">
                     <mat-form-field>
                         <mat-label>{{0|currency}}</mat-label>
-                        <input matInput formControlName="amount">
+                        <input type="number" matInput formControlName="amount">
                     </mat-form-field>
                 </div>
                 <div class="col-sm" *ngIf="form.key.donationType.reoccurrence" style="margin-left: 100px;">
@@ -26,7 +26,7 @@
         </div>
         <div style="margin-left: 740px;">
             <button type="button" (click)="onCancel()" mat-button style="background-color: red;color:white">CANCEL</button>
-            <button  type="button" (click)="buildShoppingCart()" mat-button style="background-color: red;color:white">CONTINUE</button>
+            <button type="button" (click)="buildShoppingCart()" mat-button style="background-color: red;color:white">CONTINUE</button>
         </div>
     </mat-card-content>
 </mat-card>
