@@ -15,18 +15,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="roles")
+@Table(name="donation_types")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class User_Roles {
+public class Donation_Types {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO) 
 	private int id;
 	@Column
-	private String role_name;
-	
+	private String type_name;
 	@Column
-    @OneToMany(mappedBy = "roles")
-    private Set<Users> users;
+    @OneToMany(mappedBy = "donation_types")
+    private Set<Donations> donations;
 }
