@@ -19,7 +19,7 @@ public class UserService {
 	public void adduser(Users users) {
 		Users u = userDTO.userModelToEntity(users);
 		System.out.println("In service: "+u.getRoles());
-		ur.save(users);
+		ur.save(u);
 	}
 	
 	public Users checkEmailExist(Users users) {
