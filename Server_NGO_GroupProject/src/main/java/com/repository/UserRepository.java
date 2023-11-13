@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.Entity.Users;
+import com.entity.Users;
 @Repository
 public interface UserRepository extends JpaRepository<Users,Integer>{
 	@Transactional

@@ -2,7 +2,7 @@ package com.dto;
 
 import org.springframework.stereotype.Component;
 
-import com.Entity.User_Roles;
+import com.entity.User_Roles;
 
 @Component
 public class RoleDTO {
@@ -12,6 +12,7 @@ public class RoleDTO {
 
         ur.setId(roles.getId());
         ur.setRole_name(roles.getRole_name());
+        //ur.setUsers(roles.getUsers());
 
         return ur;
     }

@@ -5,7 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.Entity.Users;
+import com.entity.Users;
 
 
 @Component
@@ -21,8 +21,9 @@ public class UserDTO {
         Users u = new Users();
         u.setName(users.getName());
         u.setPassword(this.bCryptPasswordEncoder.encode(users.getPassword()));
+        System.out.println("In DTO: "+u.getPassword());
         System.out.println("In DTO: "+users.getRoles());
-	u.setEmail(users.getEmail());
+        u.setEmail(users.getEmail());
         u.setRoles(roleDTO.roleModelToEntity(users.getRoles()));
         
         return u;

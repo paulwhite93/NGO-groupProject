@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Entity.Users;
+import com.entity.Users;
 import com.service.UserService;
 
 
@@ -26,7 +26,6 @@ public class UserController {
 		if(us.checkEmailExist(users)!=null) {
 			return new ResponseEntity<>("Email is already taken!", HttpStatus.BAD_REQUEST);
 		}
-		System.out.println(users.getRoles());
 		us.adduser(users);
 		
 		return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
