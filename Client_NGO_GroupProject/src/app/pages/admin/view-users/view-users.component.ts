@@ -3,7 +3,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmationDialogData, ConfirmationDialogComponent } from 'src/app/component/confirmation-dialog/confirmation-dialog.component';
+import {
+  ConfirmationDialogData,
+  ConfirmationDialogComponent,
+} from 'src/app/component/confirmation-dialog/confirmation-dialog.component';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 export interface DonationData {
   id: string;
   first_name: string;
@@ -36,19 +40,35 @@ const NAMES: string[] = [
 @Component({
   selector: 'app-view-users',
   templateUrl: './view-users.component.html',
-  styleUrls: ['./view-users.component.css']
+  styleUrls: ['./view-users.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed,void', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ])],
 })
+
+
 export class ViewUsersComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'first_name', 'last_name', 'email', 'role', 'edit', 'delete'];
+  displayedColumns: string[] = [
+    'id',
+    'first_name',
+    'last_name',
+    'email',
+    'role',
+    'edit',
+    'delete',
+  ];
   dataSource: MatTableDataSource<DonationData>;
+  expandedDonation: DonationData | null = null;
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
-  
 
   constructor(private dialog: MatDialog) {
     // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
+    const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(users);
@@ -68,49 +88,58 @@ export class ViewUsersComponent implements AfterViewInit {
     }
   }
   // Add these methods to your component
-editUser(user: any) {
-  // Implement the logic for editing a user
-  console.log('Editing user:', user);
+  editUser(user: DonationData) {
+    this.expandedDonation = this.expandedDonation === user ? null : user;
+    // Implement the logic for editing a user
+    console.log('Editing user:', user);
+  }
+expandRow(row: DonationData) {    
+  console.log('expandRow called for row:', row);
+  this.expandedDonation = this.expandedDonation === row ? null : row;
+
 }
 
-deleteUser(user: any) {
-  const confirmationData: ConfirmationDialogData = {
-    title: 'Confirm Delete',
-    message: "Are you sure you want to delete this user? "+ 
-    "<br><b>name: </b>" + user.first_name + " " + user.last_name + 
-    "<br><b>email: </b> " + user.email +
-    "<br><b>role: </b>" + user.role,
-  };
-
-  console.log(user);
   
-  const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-    data: confirmationData,
-  });
+  deleteUser(user: any) {
+    const confirmationData: ConfirmationDialogData = {
+      title: 'Confirm Delete',
+      message:
+        'Are you sure you want to delete this user? ' +
+        '<br><b>name: </b>' +
+        user.first_name +
+        ' ' +
+        user.last_name +
+        '<br><b>email: </b> ' +
+        user.email +
+        '<br><b>role: </b>' +
+        user.role,
+    };
 
-  dialogRef.afterClosed().subscribe((result: any) => {
-    if (result) {
-      // Implement the logic for deleting the user
-      console.log('Deleting user:', user);
-    }
-  });
-}
+    console.log(user);
 
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: confirmationData,
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        // Implement the logic for deleting the user
+        console.log('Deleting user:', user);
+      }
+    });
+  }
 }
 
 /** Builds and returns a new User. */
 function createNewUser(id: number): DonationData {
   const firstname = NAMES[Math.round(Math.random() * (NAMES.length - 1))];
   const lastname = NAMES[Math.round(Math.random() * (NAMES.length - 1))];
-  const name = firstname+lastname;
+  const name = firstname + lastname;
   return {
     id: id.toString(),
     first_name: firstname,
     last_name: lastname,
-    email: name+"@gmail.com",
-    role: Math.random() * 1000 > 500 ? "Admin" : "User",
+    email: name + '@gmail.com',
+    role: Math.random() * 1000 > 500 ? 'Admin' : 'User',
   };
 }
-
-
-
