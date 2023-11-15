@@ -7,7 +7,13 @@ import {
   ConfirmationDialogData,
   ConfirmationDialogComponent,
 } from 'src/app/component/confirmation-dialog/confirmation-dialog.component';
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 export interface DonationData {
   id: string;
   first_name: string;
@@ -43,13 +49,15 @@ const NAMES: string[] = [
   styleUrls: ['./view-users.component.css'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed,void', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ])],
+      state('collapsed,void', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition(
+        'expanded <=> collapsed',
+        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+      ),
+    ]),
+  ],
 })
-
-
 export class ViewUsersComponent implements AfterViewInit {
   displayedColumns: string[] = [
     'id',
@@ -67,8 +75,8 @@ export class ViewUsersComponent implements AfterViewInit {
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
   constructor(private dialog: MatDialog) {
-    // Create 100 users
-    const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
+    // Create 50 users
+    const users = Array.from({ length: 50 }, (_, k) => createNewUser(k + 1));
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(users);
@@ -87,19 +95,16 @@ export class ViewUsersComponent implements AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  // Add these methods to your component
   editUser(user: DonationData) {
     this.expandedDonation = this.expandedDonation === user ? null : user;
     // Implement the logic for editing a user
     console.log('Editing user:', user);
   }
-expandRow(row: DonationData) {    
-  console.log('expandRow called for row:', row);
-  this.expandedDonation = this.expandedDonation === row ? null : row;
+  expandRow(row: DonationData) {
+    console.log('expandRow called for row:', row);
+    this.expandedDonation = this.expandedDonation === row ? null : row;
+  }
 
-}
-
-  
   deleteUser(user: any) {
     const confirmationData: ConfirmationDialogData = {
       title: 'Confirm Delete',
