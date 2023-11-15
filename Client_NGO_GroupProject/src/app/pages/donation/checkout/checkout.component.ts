@@ -62,7 +62,7 @@ export class CheckoutComponent {
   updateCart(){
     //modify the cart data
     //need to parse into shoppingCart.items to modify a specific entry
-    this.router.navigate(['makedonation']);
+    this.router.navigate(['/user/makedonation']);
     //modify amount
     //modify if monthly
   }
@@ -79,10 +79,19 @@ export class CheckoutComponent {
     //save all Donation records
     //return to home page
     //send email to user_email 
-    this.router.navigate(['home']);
+    let donorEmail = this.shoppingCart.items[0].donor.email;
+    this.shoppingCart.items.forEach((item:Donation)=>{
+      this.donationService.postDonation(item);
+    })
+    //this all happens after donations are sent to server
+    if(donorEmail){
+      this.donationService.sendEmail(donorEmail, "A donation has been made with a total of :"+this.shoppingCart.total+", with a monthly donation amount of :"+this.shoppingCart.monthlyTotal);
+    }
+    this.donationService.cleanUpLocalStorage();
+    this.router.navigate(['/user']);
   }
   continueShopping(){
     //return to Make-Donation
-    this.router.navigate(['makedonation'])
+    this.router.navigate(['/user/makedonation'])
   }
 }

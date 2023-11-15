@@ -14,9 +14,6 @@ import { CheckoutComponent } from './pages/donation/checkout/checkout.component'
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
-  { path: 'donor', component: DonorComponent, pathMatch: 'full' },
-  { path: 'makedonation', component: MakeDonationComponent },
-  { path: 'checkout', component: CheckoutComponent},
   //ADMIN ROUTING
   {
     path: 'admin',
@@ -32,14 +29,12 @@ const routes: Routes = [
   {
     path: 'user',
     component: UserWelcomeComponent,
-    children: [  //dont really need child routes for user
-                //child routes are for when we want to nest components using app-routing
-                //which were not really doing in this case were just doing new pages
-      { path: '', component: UserWelcomeComponent },
-    ],
+    children: [   
+      { path: 'donor', component: DonorComponent},
+      { path: 'makedonation', component: MakeDonationComponent },
+      { path: 'checkout', component: CheckoutComponent},
+      ],
   },
-
-
 ];
 
 @NgModule({

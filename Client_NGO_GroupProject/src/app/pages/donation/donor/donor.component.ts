@@ -35,12 +35,12 @@ export class DonorComponent {
     //and send to shopping cart and redirect to cart
     console.log(this.donorForm.value);
     localStorage.setItem('donor', JSON.stringify(this.donorForm.value));
-    this.router.navigate(['makedonation']);
+    this.router.navigate(['/user/makedonation']);
   }
   onCancel(){
     //return to previous page
     console.log("cancel");
-    localStorage.removeItem('donor');
-    this.router.navigate(['home']);
+    this.donationService.cleanUpLocalStorage();
+    this.router.navigate(['/user']);
   }
 }

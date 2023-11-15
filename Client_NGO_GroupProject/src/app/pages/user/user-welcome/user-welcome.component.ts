@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./user-welcome.component.css']
 })
 export class UserWelcomeComponent {
-
+  name = "test";
+  constructor(){
+    
+  }
+  
 }

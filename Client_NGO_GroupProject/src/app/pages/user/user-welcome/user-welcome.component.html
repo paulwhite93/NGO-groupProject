@@ -1,3 +1,11 @@
-<h1>user-welcome works!</h1>
-Check out app routing for ways to handle the components! Edit to your liking in that regard 😊
-<a [routerLink]="'/donor'">Donate link though for now to show what you've got so far!</a>
+<div class="bootstrap-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <app-user-sidebar></app-user-sidebar>
+            <div class="col-md-10" style="text-align: center;">
+                <br>        
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

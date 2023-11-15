@@ -1,1 +1,21 @@
-<p>user-sidebar works!</p>
+<mat-sidenav-container>
+    <mat-card class="mt50">
+        <mat-action-list>
+            <div mat-subheader>Menu</div>
+            
+            <button mat-list-item routerLink="/user">
+                <mat-icon mat-list-icon>home</mat-icon>
+                Home
+            </button>
+            <button mat-list-item routerLink="/user/donor">
+                <mat-icon mat-list-icon>card_giftcard</mat-icon>
+                Make a Donation
+            </button>
+            <!-- (click)="logout()" *ngIf="isLoggedIn" -->
+            <button mat-list-item>
+                <mat-icon mat-list-icon>logout</mat-icon>
+                Log out
+            </button>
+        </mat-action-list>
+    </mat-card>
+</mat-sidenav-container>

@@ -93,12 +93,12 @@ public donor!: Donator;
     
   }
   continue(){
-    this.router.navigate(['checkout']);
+    this.router.navigate(['/user/checkout']);
   }
   onCancel(){
     localStorage.removeItem('donor');
     //return to user home page
-    this.router.navigate(['home']);
+    this.router.navigate(['/user']);
   }
   
 }
