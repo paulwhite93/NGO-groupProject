@@ -9,6 +9,8 @@ Initialize database:
 INSERT INTO public.roles(
 	id, role_name)
 	VALUES (1, 'admin'),(2,'user');
+
+
 INSERT INTO public.donation_types(
 	id, type_name)
-	VALUES (1, 'General Donation Fund'),(2,'Run for the sun 2017'),(3,'Mission Trip Sponsorship'),(4,'Memorial Gift'); 
+	VALUES (1, 'General Donation Fund',true),(2,'Run for the sun 2017',false),(3,'Mission Trip Sponsorship',true),(4,'Memorial Gift',true); 
