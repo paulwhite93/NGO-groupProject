@@ -27,6 +27,7 @@ public class DonationController {
 	
 	@RequestMapping(value="/addDonation",method=RequestMethod.POST)
 	public ResponseEntity<String> adddonation(@RequestBody Donations donation) {
+		System.out.println(donation);
 		donationService.addDonation(donation);
 		return new ResponseEntity<>("Donation and donor added", HttpStatus.OK);
 	}
@@ -51,7 +52,7 @@ public class DonationController {
 	}
 	
 	@RequestMapping(value="/displayDonationType",method=RequestMethod.GET)
-	public List<?> displayType(){
+	public List<Donation_Types> displayType(){
 		List<Donation_Types> li=donationService.getAllDonationType();
 		return li;
 	}

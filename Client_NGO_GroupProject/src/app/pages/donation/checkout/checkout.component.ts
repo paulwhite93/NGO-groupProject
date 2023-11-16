@@ -83,7 +83,7 @@ export class CheckoutComponent {
     this.shoppingCart.items.forEach((item:Donation)=>{
       this.donationService.postDonation(item).subscribe({
         next: (data:any)=>{
-          console.log(data);
+          console.log(data);    
         },
         error: (error:any)=>{
           console.log(error);
@@ -91,9 +91,7 @@ export class CheckoutComponent {
       });
     })
     //this all happens after donations are sent to server
-    if(donorEmail){
-      this.donationService.sendEmail(donorEmail, "A donation has been made with a total of :"+this.shoppingCart.total+", with a monthly donation amount of :"+this.shoppingCart.monthlyTotal);
-    }
+
     this.donationService.cleanUpLocalStorage();
     this.router.navigate(['/user']);
   }

@@ -31,11 +31,18 @@ public donor!: Donator;
       this.donor = JSON.parse(val);
     }
     //Retrieve donation Type List
-    let donationTypeList = this.donationService.retrieveDonationTypes();
-    console.log(donationTypeList);
-    this.buildDonationMap(donationTypeList);
+     this.donationService.retrieveDonationTypes().subscribe({
+      next:(data:DonationType[]) =>{
+        console.log("Printing Donation Types: "+data);
+        this.buildDonationMap(data);
+      },
+      error:()=>{
+
+      }
+    });
+    
   }
-  buildDonationMap(types:any){
+  buildDonationMap(types:DonationType[]){
     //build map of donations and formgroups
     if(localStorage.getItem('shoppingCart')!=null){
       //retrieve and populate donation fields
@@ -45,7 +52,7 @@ public donor!: Donator;
       types.forEach((e: DonationType) => {
         var donation = this.createDonation(e);
         shoppingCart.forEach((d:Donation)=>{
-          if (donation.donationType.type == d.donationType.type){
+          if (donation.donation_types.type_name == d.donation_types.type_name){
             donation = d;
           }
         });
@@ -71,7 +78,7 @@ public donor!: Donator;
       donor: this.donor,
       date: new Date(),
       amount: 0.00,
-      donationType: donationType,
+      donation_types: donationType,
       reoccuringDonation: false
     };
   }

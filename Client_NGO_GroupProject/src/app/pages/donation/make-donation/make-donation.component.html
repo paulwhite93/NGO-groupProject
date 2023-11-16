@@ -11,7 +11,7 @@
         <div class="container" *ngFor="let form of formList | keyvalue">
             <form [formGroup]="form.value" class="row">
                 <div class="col-5 fw-bold">
-                    <p>{{form.key.donationType.type | uppercase}}</p>
+                    <p>{{form.key.donation_types.type_name | uppercase}}</p>
                 </div>
                 <div class="col-3">
                     <mat-form-field>
@@ -19,7 +19,7 @@
                         <input type="number" matInput formControlName="amount">
                     </mat-form-field>
                 </div>
-                <div class="col-sm" *ngIf="form.key.donationType.reoccurrence" style="margin-left: 100px;">
+                <div class="col-sm" *ngIf="form.key.donation_types.reoccurrence" style="margin-left: 100px;">
                     <mat-checkbox matInput formControlName="reoccuringDonation"></mat-checkbox>
                 </div>
             </form>

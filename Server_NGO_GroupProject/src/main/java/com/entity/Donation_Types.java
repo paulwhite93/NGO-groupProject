@@ -31,4 +31,6 @@ public class Donation_Types {
     @OneToMany(mappedBy = "donation_types")
 	@JsonIgnore
     private Set<Donations> donations;
+	@Column
+	private boolean reoccurrence;
 }

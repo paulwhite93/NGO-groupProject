@@ -25,8 +25,10 @@ export class DonationNewComponent {
       f.value.donation_recurring = false;
     }
     console.log(f.value)
-    f.value['id'] = this.dataService.retrieveDonationTypes().findIndex;
-    // this.dataService.employees.insert(f.value);
-    this.router.navigate(["/admin/add-donation"]);
+   
+    this.dataService.addDonationType(f.value).subscribe(data => {
+      this.router.navigate(["/admin/add-donation"]);
+    });
+    
   }
 }

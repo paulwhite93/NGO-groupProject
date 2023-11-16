@@ -11,7 +11,7 @@ export interface Donation{
 
     amount:Number,
 
-    donationType:DonationType,
+    donation_types:DonationType,
     
     reoccuringDonation:boolean,
 }

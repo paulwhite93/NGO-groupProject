@@ -2,7 +2,7 @@ export interface DonationType{
 
     id:Number,
 
-    type:string,
+    type_name:string,
     
     reoccurrence:boolean,
 }
