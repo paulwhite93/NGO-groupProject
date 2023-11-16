@@ -10,7 +10,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class RegisterComponent {
   user = new FormGroup({
-    name: new FormControl(),
+    first_name: new FormControl(),
+    last_name: new FormControl(),
     password: new FormControl(),
     email: new FormControl(),
   });
@@ -21,30 +22,17 @@ export class RegisterComponent {
   onSubmit() {
     //on submit we want to send the user to their appropriate route
     console.log(this.user.value);
-    console.log({
-      name:this.user.get(['name']),
-      email:this.user.get(['email']),
-      password:this.user.get(['password']),
-      roles:{
-          id:2,
-          role_name:"user"
-      }
-    })
     this.userService.addUser({
-      name:this.user.get(['name']),
-      email:this.user.get(['email']),
-      password:this.user.get(['password']),
+      firstname:this.user.get(['first_name'])?.value,
+      lastname:this.user.get(['last_name'])?.value,
+      email:this.user.get(['email'])?.value,
+      password:this.user.get(['password'])?.value,
       roles:{
           id:2,
           role_name:"user"
       }
-    }).subscribe({
-      next:()=>{
-        this.router.navigate(['/login']);
-      },
-      error:()=>{
-
-      }
+    }).subscribe((data:any)=>{
+      this.router.navigate(['/login']);
     })
   }
   onCancel() {

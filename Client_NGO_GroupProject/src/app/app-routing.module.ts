@@ -11,10 +11,12 @@ import { UserWelcomeComponent } from './pages/user/user-welcome/user-welcome.com
 import { MakeDonationComponent } from './pages/donation/make-donation/make-donation.component';
 import { CheckoutComponent } from './pages/donation/checkout/checkout.component';
 import { DonationNewComponent } from './pages/admin/donation-new/donation-new.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
+  { path: 'register', component: RegisterComponent, },
   //ADMIN ROUTING
   {
     path: 'admin',
