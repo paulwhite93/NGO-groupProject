@@ -81,7 +81,14 @@ export class CheckoutComponent {
     //send email to user_email 
     let donorEmail = this.shoppingCart.items[0].donor.email;
     this.shoppingCart.items.forEach((item:Donation)=>{
-      this.donationService.postDonation(item);
+      this.donationService.postDonation(item).subscribe({
+        next: (data:any)=>{
+          console.log(data);
+        },
+        error: (error:any)=>{
+          console.log(error);
+        }
+      });
     })
     //this all happens after donations are sent to server
     if(donorEmail){

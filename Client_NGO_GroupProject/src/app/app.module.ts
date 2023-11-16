@@ -23,6 +23,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { AdminSidebarComponent } from './pages/admin/admin-sidebar/admin-sidebar.component';
 import { ConfirmationDialogComponent } from './component/confirmation-dialog/confirmation-dialog.component';
+import { HTTP_INTERCEPTORS,HttpClientModule } from '@angular/common/http';
+import { InterceptorService } from './services/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { ConfirmationDialogComponent } from './component/confirmation-dialog/con
     ConfirmationDialogComponent,
   ],
   imports: [
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
@@ -54,7 +57,11 @@ import { ConfirmationDialogComponent } from './component/confirmation-dialog/con
     MatTooltipModule,
     MatSidenavModule,
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: InterceptorService,
+    multi: true,
+  }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

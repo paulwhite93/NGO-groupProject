@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class DonationService {
   constructor(private http:HttpClient){}
-  private baseUrl = `http://localhost:8080`;
+  private baseUrl = `http://localhost:8080/dono`;
 
   public retrieveDonationTypes():Observable<any>{
     return this.http.get(this.baseUrl+'/getDonationTypes');
@@ -33,6 +33,9 @@ export class DonationService {
     //   type:'Memorial Gift',
     //   reoccurrence:true
     // }]
+  }
+  public getDonations():Observable<any>{
+    return this.http.get(this.baseUrl+'/display');
   }
   public postDonation(donation:Donation):Observable<any>{
     /*
