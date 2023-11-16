@@ -24,6 +24,7 @@ export class LoginComponent {
     console.log(this.login.value.userName);
     if (this.login.value.userName == 'admin') {
       this.router.navigate(['/admin']);
+      //Will need to put in the authentication
     }
     else if (this.login.value.userName == 'user') {
       this.router.navigate(['/user']);

@@ -12,21 +12,24 @@ import { MakeDonationComponent } from './pages/donation/make-donation/make-donat
 import { CheckoutComponent } from './pages/donation/checkout/checkout.component';
 import { DonationNewComponent } from './pages/admin/donation-new/donation-new.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { AdminGuardService } from './services/admin-guard.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
-  { path: 'register', component: RegisterComponent, },
+  { path: 'register', component: RegisterComponent },
   //ADMIN ROUTING
   {
     path: 'admin',
     component: AdminWelcomeComponent,
+    canActivate: [AdminGuardService],
     children: [
       // { path: '', component: AdminWelcomeComponent },
-      { path: 'add-donation', component: AddDonationComponent,
-    children:[
-      { path: 'new', component: DonationNewComponent}
-    ] },
+      {
+        path: 'add-donation',
+        component: AddDonationComponent,
+        children: [{ path: 'new', component: DonationNewComponent }],
+      },
       { path: 'view-donations', component: ViewDonationsComponent },
       { path: 'view-users', component: ViewUsersComponent },
     ],
@@ -35,16 +38,16 @@ const routes: Routes = [
   {
     path: 'user',
     component: UserWelcomeComponent,
-    children: [   
-      { path: 'donor', component: DonorComponent},
+    children: [
+      { path: 'donor', component: DonorComponent },
       { path: 'makedonation', component: MakeDonationComponent },
-      { path: 'checkout', component: CheckoutComponent},
-      ],
+      { path: 'checkout', component: CheckoutComponent },
+    ],
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
