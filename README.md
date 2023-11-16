@@ -7,4 +7,4 @@ Generic group project to gain more insight and practice with Spring boot Rest AP
 Initialize database
 INSERT INTO public.roles(
 	id, role_name)
-	VALUES (1, admin),(2,user);
+	VALUES (1, 'admin'),(2,'user');
