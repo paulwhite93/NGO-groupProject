@@ -25,6 +25,8 @@ import { AdminSidebarComponent } from './pages/admin/admin-sidebar/admin-sidebar
 import { ConfirmationDialogComponent } from './component/confirmation-dialog/confirmation-dialog.component';
 import { HTTP_INTERCEPTORS,HttpClientModule } from '@angular/common/http';
 import { InterceptorService } from './services/interceptor.service';
+import { DonationNewComponent } from './pages/admin/donation-new/donation-new.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { InterceptorService } from './services/interceptor.service';
     AdminSidebarComponent,
     ConfirmationDialogComponent,
     DonationNewComponent,
+    RegisterComponent,
   ],
   imports: [
     HttpClientModule,

@@ -12,6 +12,17 @@ export class UserService {
   private baseUrl = 'http://localhost:8080/user';
 
   public addUser(user:User):Observable<any>{
+    /* 
+    {
+    "name":"user",
+    "email":"email",
+    "password":"test",
+    "roles":{
+        "id":1,
+        "role_name":"admin"
+      }
+    }
+    */
     return this.httpClient.post(this.baseUrl+'/register',user);
   }
 
