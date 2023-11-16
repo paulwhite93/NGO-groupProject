@@ -7,8 +7,12 @@
         <form [formGroup]="user" (ngSubmit)="onSubmit()" ngNativeValidate>
             <p>
             <mat-form-field style="width: 450px;">
+                <mat-label>NAME</mat-label>
+                <input type="text" matInput formControlName="name" required>
+            </mat-form-field>
+            <mat-form-field style="width: 450px;">
                 <mat-label>USERNAME</mat-label>
-                <input type="text" matInput formControlName="userName" required>
+                <input type="text" matInput formControlName="email" required>
             </mat-form-field>
             <mat-form-field style="width:455px;margin-left:5px;">
                 <mat-label>PASSWORD</mat-label>

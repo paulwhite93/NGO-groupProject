@@ -11,7 +11,7 @@ export class UserService {
   constructor(private httpClient:HttpClient) { }
   private baseUrl = 'http://localhost:8080/user';
 
-  public addUser(user:User):Observable<any>{
+  public addUser(user:any):Observable<any>{
     /* 
     {
     "name":"user",
