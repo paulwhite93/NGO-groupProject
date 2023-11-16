@@ -1,43 +1,29 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { User } from '../Model/User';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class UserService {
-  public getUsers() {
-    /*
-      id: number,
 
-  name: string,
+  constructor(private httpClient:HttpClient) { }
+  private baseUrl = 'http://localhost:8080/user';
 
-  password: string,
+  public addUser(user:User):Observable<any>{
+    return this.httpClient.post(this.baseUrl+'/register',user);
+  }
 
-  email: string,
+  public getUsers():Observable<any>{
+    return this.httpClient.get(this.baseUrl+'/display');
+  }
 
-  user_role: UserRole,
-  */
-    return [
-      {
-        id: 1,
-        name: 'George Doe',
-        email: 'georgedoe@gmail.com',
-        // Will probably have to do something here for nested object User_Role
-        user_role: 'admin',
-      },
-      {
-        id: 2,
-        name: 'John Smith',
-        email: 'johnsmith@gmail.com',
-        // Will probably have to do something here for nested object User_Role
-        user_role: 'user',
-      },
-      {
-        id: 3,
-        name: 'Jane Lane',
-        email: 'janelane@gmail.com',
-        // Will probably have to do something here for nested object User_Role
-        user_role: 'user',
-      },
-    ];
+  public deleteUser(userId:Number):Observable<any>{
+    return this.httpClient.delete(this.baseUrl+'/delete/'+userId);
+  }
+
+  public updateUser(user:User):Observable<any>{
+    return this.httpClient.put(this.baseUrl+'/update/'+user.id,user);
   }
 }

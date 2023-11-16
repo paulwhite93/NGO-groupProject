@@ -3,6 +3,7 @@ package com.entity;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,7 +39,7 @@ public class Donations {
     @JoinColumn(name = "donationType_id" , referencedColumnName = "id")
 	@JsonIgnoreProperties(value = {"donations"})
     private Donation_Types donation_types;
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "donor_id" , referencedColumnName = "id")
 	@JsonIgnoreProperties(value = {"donations"})
     private Donors donor;

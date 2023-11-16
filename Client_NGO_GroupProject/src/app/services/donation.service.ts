@@ -1,35 +1,47 @@
 import { Injectable } from '@angular/core';
 import { Donation } from '../Model/Donation';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { DonationType } from '../Model/DonationType';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DonationService {
+  constructor(private http:HttpClient){}
+  private baseUrl = `http://localhost:8080/dono`;
 
-  public retrieveDonationTypes(){
-    return [
-    {
-      id:1,
-      type:'General Donation Fund',
-      reoccurrence:true
-    },
-    {
-      id:2,
-      type:'Run for the sun 2017',
-      reoccurrence:true
-    },
-    {
-      id:3,
-      type:'Mission Trip Sponsorship',
-      reoccurrence:false
-    },
-    {
-      id:4,
-      type:'Memorial Gift',
-      reoccurrence:true
-    }]
+  public retrieveDonationTypes():Observable<any>{
+    return this.http.get(this.baseUrl+'/getDonationTypes');
+    // return [
+    // {
+    //   id:1,
+    //   type:'General Donation Fund',
+    //   reoccurrence:true
+    // },
+    // {
+    //   id:2,
+    //   type:'Run for the sun 2017',
+    //   reoccurrence:true
+    // },
+    // {
+    //   id:3,
+    //   type:'Mission Trip Sponsorship',
+    //   reoccurrence:false
+    // },
+    // {
+    //   id:4,
+    //   type:'Memorial Gift',
+    //   reoccurrence:true
+    // }]
   }
-  public postDonation(donation:Donation){
+  public addDonationType(donationType:DonationType):Observable<any>{
+    return this.http.post(this.baseUrl+'/addDonationType',donationType);
+  }
+  public getDonations():Observable<any>{
+    return this.http.get(this.baseUrl+'/display');
+  }
+  public postDonation(donation:Donation):Observable<any>{
     /*
     Donation Format
     {
@@ -42,6 +54,7 @@ export class DonationService {
     */
    //Send donation to server ->
    console.log(donation);
+   return this.http.post(this.baseUrl + '/addDonation',donation);
   }
   public sendEmail(email:string, message:string){
 
