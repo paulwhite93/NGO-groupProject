@@ -28,7 +28,8 @@ export class LoginComponent {
         localStorage.setItem("role",data.roles.role_name)
         this.auth.getCredentials(this.login.value).subscribe({
           next: (data:any) =>{
-            localStorage.setItem("accessToken", data["accessToken"])
+            console.log(data);
+            localStorage.setItem("accessToken", data["jwt"])
             if(this.auth.isAdmin()){
               this.router.navigate(['/admin']);
             }
