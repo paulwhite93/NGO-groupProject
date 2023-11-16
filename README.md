@@ -12,5 +12,5 @@ INSERT INTO public.roles(
 
 
 INSERT INTO public.donation_types(
-	id, type_name)
-	VALUES (1, 'General Donation Fund',true),(2,'Run for the sun 2017',false),(3,'Mission Trip Sponsorship',true),(4,'Memorial Gift',true); 
+	id, type_name, reoccurrence)
+	VALUES (1, 'General Donation Fund','true'),(2,'Run for the sun 2017','false'),(3,'Mission Trip Sponsorship','true'),(4,'Memorial Gift','true'); 
