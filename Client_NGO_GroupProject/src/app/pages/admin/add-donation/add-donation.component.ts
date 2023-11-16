@@ -106,22 +106,22 @@ export class AddDonationComponent implements AfterViewInit {
     this.expandedDonation = this.expandedDonation === row ? null : row;
   }
 
-  deleteUser(user: any) {
+  deleteDonation(donation: any) {
     //Information to pass to the Confirmation Dialog
     const confirmationData: ConfirmationDialogData = {
       title: 'Confirm Delete',
       message:
         'Are you sure you want to delete this donation event? ' +
         '<br><b>Name: </b>' +
-        user.donation_type +
+        donation.donation_type +
         '<br><b>Enabled: </b> ' +
-        user.donation_enabled +
+        donation.donation_enabled +
         '<br><b>Recurring: </b>' +
-        user.donation_recurring,
+        donation.donation_recurring,
     };
 
     //Log to make sure user object is indeed what we think it is
-    console.log(user);
+    console.log(donation);
 
     //
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
@@ -133,7 +133,7 @@ export class AddDonationComponent implements AfterViewInit {
       //If the user selected yes:
       if (result) {
         // Implement the logic for deleting the donation
-        console.log('Deleting donation event:', user);
+        console.log('Deleting donation event:', donation);
       }
       //If user clicks out or presses cancel
       else{

@@ -10,6 +10,7 @@ import { AdminWelcomeComponent } from './pages/admin/admin-welcome/admin-welcome
 import { UserWelcomeComponent } from './pages/user/user-welcome/user-welcome.component';
 import { MakeDonationComponent } from './pages/donation/make-donation/make-donation.component';
 import { CheckoutComponent } from './pages/donation/checkout/checkout.component';
+import { DonationNewComponent } from './pages/admin/donation-new/donation-new.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -20,7 +21,10 @@ const routes: Routes = [
     component: AdminWelcomeComponent,
     children: [
       // { path: '', component: AdminWelcomeComponent },
-      { path: 'add-donation', component: AddDonationComponent },
+      { path: 'add-donation', component: AddDonationComponent,
+    children:[
+      { path: 'new', component: DonationNewComponent}
+    ] },
       { path: 'view-donations', component: ViewDonationsComponent },
       { path: 'view-users', component: ViewUsersComponent },
     ],

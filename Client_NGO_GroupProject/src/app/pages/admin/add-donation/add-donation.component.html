@@ -1,10 +1,7 @@
-<p>add-donation works!</p>
-This will be the page where admins can add various donation outlets
-sets them to be able to be recurring payments, active / inactive and whatnot
-
-
 <br>
 <h1>Donation List</h1>
+<button mat-stroked-button color="warn" routerLink="new">Add Type</button> <br> <br>
+<router-outlet></router-outlet>
 <mat-form-field>
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. General Donation" #input>
@@ -49,7 +46,7 @@ sets them to be able to be recurring payments, active / inactive and whatnot
         <ng-container matColumnDef="delete">
             <th mat-header-cell *matHeaderCellDef>Delete</th>
             <td mat-cell *matCellDef="let row">
-                <button mat-icon-button (click)="deleteUser(row)">
+                <button mat-icon-button (click)="deleteDonation(row)">
                     <mat-icon>delete</mat-icon>
                 </button>
             </td>
@@ -91,4 +88,5 @@ sets them to be able to be recurring payments, active / inactive and whatnot
 
     <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"
         aria-label="Select page of users"></mat-paginator>
+
 </div>

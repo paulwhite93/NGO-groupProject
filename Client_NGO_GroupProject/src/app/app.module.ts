@@ -23,6 +23,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { AdminSidebarComponent } from './pages/admin/admin-sidebar/admin-sidebar.component';
 import { ConfirmationDialogComponent } from './component/confirmation-dialog/confirmation-dialog.component';
+import { DonationNewComponent } from './pages/admin/donation-new/donation-new.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ConfirmationDialogComponent } from './component/confirmation-dialog/con
     UserWelcomeComponent,
     AdminSidebarComponent,
     ConfirmationDialogComponent,
+    DonationNewComponent,
   ],
   imports: [
     FormsModule,
