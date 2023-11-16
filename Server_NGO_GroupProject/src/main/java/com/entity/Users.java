@@ -33,7 +33,9 @@ public class Users {
 	@GeneratedValue(strategy = GenerationType.AUTO) 
 	private int id;
 	@NonNull
-	private String name;
+	private String firstname;
+	@NonNull
+	private String lastname;
 	@NonNull
 	private String password;
 	@NonNull

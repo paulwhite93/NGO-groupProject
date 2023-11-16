@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.lang.Nullable;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -26,17 +28,27 @@ public class Donors {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO) 
 	private int id;
-	@NonNull
+	@Nullable
 	private String firstName;
+	@Nullable
 	private String lastName;
+	@Nullable
 	private String CMA;
+	@Nullable
 	private String phone;
+	@Nullable
 	private String email;
+	@Nullable
 	private String address1;
+	@Nullable
 	private String address2;
+	@Nullable
 	private String city;
+	@Nullable
 	private String zip;
+	@Nullable
 	private String country;
+	@Nullable
 	private String urbanization;
 	@Column
 	@OneToMany(mappedBy = "donor")

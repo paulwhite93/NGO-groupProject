@@ -19,7 +19,8 @@ public class UserDTO {
     public Users userModelToEntity(Users users){
 
         Users u = new Users();
-        u.setName(users.getName());
+        u.setFirstname(users.getFirstname());
+        u.setLastname(users.getLastname());
         u.setPassword(this.bCryptPasswordEncoder.encode(users.getPassword()));
         System.out.println("In DTO: "+u.getPassword());
         System.out.println("In DTO: "+users.getRoles());
