@@ -30,7 +30,7 @@ public class UserService {
 		Users correctUser = checkEmailExist(users);
 		if(correctUser==null) return null;
 		boolean b=bCryptPasswordEncoder.matches(users.getPassword(), correctUser.getPassword());
-		if(b==true) return correctUser;
+		if(b==true) return users;
 		else return null;
 	}
 
@@ -43,7 +43,7 @@ public class UserService {
 		// TODO Auto-generated method stub	
 		if(ur.findById(id)==null) return null;
 		String password=bCryptPasswordEncoder.encode(users.getPassword());
-		ur.updateById(id,users.getName(),users.getEmail(),password,users.getRoles().getId());
+		ur.updateById(id,users.getFirstname(),users.getLastname(),users.getEmail(),password,users.getRoles().getId());
 		return ur.findById(id);
 		
 	}

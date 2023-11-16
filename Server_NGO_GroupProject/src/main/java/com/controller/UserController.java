@@ -9,18 +9,16 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.entity.User_Roles;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import com.entity.Users;
 import com.service.UserService;
-
+import com.entity.User_Roles;
 @CrossOrigin
 @RestController
 @RequestMapping("/user/")
@@ -39,11 +37,11 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public ResponseEntity login(@RequestBody Users users){
+	public ResponseEntity<User_Roles> login(@RequestBody Users users){
 		if(us.checkuser(users)==null) {
-			return new ResponseEntity<>("No user found with that email/password", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<>(us.checkuser(users), HttpStatus.OK);
+		return new ResponseEntity<>(users.getRoles(), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/delete/{id}",method=RequestMethod.DELETE)
