@@ -12,7 +12,9 @@ export class AuthenticationService {
   postLogin(cred:any){
     return this.http.post("http://localhost:8080/authentication",cred);
   }
-  
+  getCredentials(cred:any){
+    
+  }
   logout(){
     localStorage.clear();
     this.router.navigate(["/login"]);

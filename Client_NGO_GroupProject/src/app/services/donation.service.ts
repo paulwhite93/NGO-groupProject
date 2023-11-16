@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Donation } from '../Model/Donation';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { DonationType } from '../Model/DonationType';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,9 @@ export class DonationService {
     //   type:'Memorial Gift',
     //   reoccurrence:true
     // }]
+  }
+  public addDonationType(donationType:DonationType):Observable<any>{
+    return this.http.post(this.baseUrl+'/addDonationType',donationType);
   }
   public getDonations():Observable<any>{
     return this.http.get(this.baseUrl+'/display');
