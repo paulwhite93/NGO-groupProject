@@ -16,8 +16,12 @@ public class DonationService {
 	DonationRepository dr;
 	@Autowired
 	DonationTypeRepository dtr;
-	
+	@Autowired
+	EmailService es;
 	public Donations addDonation(Donations donation) {
+		es.sendEmail(donation.getDonor().getEmail(), 
+				"Recent Donation Confirmation To: "+donation.getDonation_types().getType_name(),
+				"Thank you for your recent contribution to "+donation.getDonation_types().getType_name()+ " of the amount: " +donation.getAmount());
 		dr.save(donation);
 		return donation;
 	}
