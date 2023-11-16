@@ -10,28 +10,29 @@ export class DonationService {
   constructor(private http:HttpClient){}
   private baseUrl = `http://localhost:8080`;
 
-  public retrieveDonationTypes(){
-    return [
-    {
-      id:1,
-      type:'General Donation Fund',
-      reoccurrence:true
-    },
-    {
-      id:2,
-      type:'Run for the sun 2017',
-      reoccurrence:true
-    },
-    {
-      id:3,
-      type:'Mission Trip Sponsorship',
-      reoccurrence:false
-    },
-    {
-      id:4,
-      type:'Memorial Gift',
-      reoccurrence:true
-    }]
+  public retrieveDonationTypes():Observable<any>{
+    return this.http.get(this.baseUrl+'/getDonationTypes');
+    // return [
+    // {
+    //   id:1,
+    //   type:'General Donation Fund',
+    //   reoccurrence:true
+    // },
+    // {
+    //   id:2,
+    //   type:'Run for the sun 2017',
+    //   reoccurrence:true
+    // },
+    // {
+    //   id:3,
+    //   type:'Mission Trip Sponsorship',
+    //   reoccurrence:false
+    // },
+    // {
+    //   id:4,
+    //   type:'Memorial Gift',
+    //   reoccurrence:true
+    // }]
   }
   public postDonation(donation:Donation):Observable<any>{
     /*
