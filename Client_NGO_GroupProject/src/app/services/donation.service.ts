@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Donation } from '../Model/Donation';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DonationService {
+  constructor(private http:HttpClient){}
+  private baseUrl = `http://localhost:8080`;
 
   public retrieveDonationTypes(){
     return [
@@ -29,7 +33,7 @@ export class DonationService {
       reoccurrence:true
     }]
   }
-  public postDonation(donation:Donation){
+  public postDonation(donation:Donation):Observable<any>{
     /*
     Donation Format
     {
@@ -42,6 +46,7 @@ export class DonationService {
     */
    //Send donation to server ->
    console.log(donation);
+   return this.http.post(this.baseUrl + '/addDonation',donation);
   }
   public sendEmail(email:string, message:string){
 
