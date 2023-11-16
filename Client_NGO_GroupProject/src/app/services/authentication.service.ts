@@ -10,10 +10,10 @@ export class AuthenticationService {
   constructor(private http:HttpClient,private router:Router) { }
   
   postLogin(cred:any){
-    return this.http.post("http://localhost:8080/authentication",cred);
+    return this.http.post("http://localhost:8080/user/login",cred);
   }
   getCredentials(cred:any){
-    
+    return this.http.post("http://localhost:8080/authentication",cred);
   }
   logout(){
     localStorage.clear();
@@ -22,6 +22,12 @@ export class AuthenticationService {
 
   isLoggedIn(){
     if(localStorage.getItem("accessToken")){
+      return true;
+    }
+    return false;
+  }
+  isAdmin(){
+    if (localStorage.getItem("role") == "admin"){
       return true;
     }
     return false;

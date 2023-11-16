@@ -24,9 +24,7 @@ export class AdminGuardService {
   | Promise <boolean | UrlTree>
   | boolean
   | UrlTree {
-  if (this.auth.isLoggedIn() 
-  // && this.login.getUserRole() == 'Librarian'
-  ) {
+  if (this.auth.isLoggedIn() && this.auth.isAdmin()) {
     return true;
   }
   this.router.navigate(['login']);

@@ -11,7 +11,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 export class LoginComponent {
 
   login = new FormGroup({
-    userName: new FormControl(),
+    email: new FormControl(),
     password: new FormControl(),
   });
   constructor(
@@ -21,14 +21,24 @@ export class LoginComponent {
 
   onSubmit() {
     //on submit we want to send the user to their appropriate route
-    console.log(this.login.value.userName);
-    if (this.login.value.userName == 'admin') {
-      this.router.navigate(['/admin']);
-      //Will need to put in the authentication
-    }
-    else if (this.login.value.userName == 'user') {
-      this.router.navigate(['/user']);
-    }
+    console.log(this.login.value);
+    
+    this.auth.postLogin(this.login.value).subscribe({
+      next:(data:any) => {
+        localStorage.setItem("role",data.roles.role_name)
+        this.auth.getCredentials(this.login.value).subscribe({
+          next: (data:any) =>{
+            localStorage.setItem("accessToken", data["accessToken"])
+            if(this.auth.isAdmin()){
+              this.router.navigate(['/admin']);
+            }
+            else{
+              this.router.navigate(['/user']);
+            }
+          }
+        });
+      },
+    });
     
   }
   onCancel() {
