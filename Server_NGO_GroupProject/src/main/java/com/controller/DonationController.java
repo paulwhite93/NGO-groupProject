@@ -19,7 +19,6 @@ import com.service.DonorService;
 @CrossOrigin
 @RestController
 @RequestMapping("/dono/")
-@CrossOrigin(origins = "http://localhost:4200")
 public class DonationController {
 	@Autowired
 	DonationService donationService;
