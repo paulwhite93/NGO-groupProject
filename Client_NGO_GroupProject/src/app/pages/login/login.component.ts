@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -14,13 +15,13 @@ export class LoginComponent {
     password: new FormControl(),
   });
   constructor(
-    private router: Router
+    private auth:AuthenticationService, 
+    private router:Router
   ) {}
 
   onSubmit() {
     //on submit we want to send the user to their appropriate route
     console.log(this.login.value.userName);
-
     if (this.login.value.userName == 'admin') {
       this.router.navigate(['/admin']);
     }
