@@ -39,11 +39,11 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public ResponseEntity<User_Roles> login(@RequestBody Users users){
+	public ResponseEntity login(@RequestBody Users users){
 		if(us.checkuser(users)==null) {
-			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("No user found with that email/password", HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<>(users.getRoles(), HttpStatus.OK);
+		return new ResponseEntity<>(us.checkuser(users), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/delete/{id}",method=RequestMethod.DELETE)
