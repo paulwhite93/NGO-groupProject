@@ -27,7 +27,7 @@ public class DonationService {
 				"Thank you for your recent contribution to "+donation.getDonation_types().getType_name()+ " of the amount: " +donation.getAmount());
 		dr.save(donation);
 		return donation;
-
+	}
 	public List<Donations> getAllDonation() {
 		// TODO Auto-generated method stub
 		return dr.findAll();

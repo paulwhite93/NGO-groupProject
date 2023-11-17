@@ -45,15 +45,15 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/delete/{id}",method=RequestMethod.DELETE)
-	public ResponseEntity<?> deleteUser(@PathVariable int id){
+	public ResponseEntity<?> deleteUser(@PathVariable("id") int id){
 		us.deleteById(id);
 		return new ResponseEntity<>("User deleted successfully", HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/update/{id}",method=RequestMethod.PUT)
-	public ResponseEntity<?> editUder(@PathVariable int id, @RequestBody Users users){
+	public ResponseEntity<?> editUser(@PathVariable("id") int id, @RequestBody Users users){
 		Optional<Users> u=us.updateUser(id,users);
-		if(u.isEmpty()) return new ResponseEntity<>("User not found", HttpStatus.BAD_REQUEST);
+		if(u == null) return new ResponseEntity<>("User not found", HttpStatus.BAD_REQUEST);
 		return new ResponseEntity<>("User edited successfully", HttpStatus.OK);
 	}
 	

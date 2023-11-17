@@ -127,8 +127,18 @@ export class ViewUsersComponent implements AfterViewInit {
     // console.log(editedUser);
     // editedUser.id = baseUser?.id;
     // console.log('Edited user:' + editedUser);
-
-    this.userService.updateUser(editUser).subscribe(
+    let id = editUser.role?.id;
+    let name = editUser.role?.name;
+    this.userService.updateUser({
+      id:editUser.id,
+      firstname:editUser.firstname,
+      lastname:editUser.lastname,
+      email:editUser.email,
+      role:{
+        id:id,
+        role_name:name
+      }
+    }).subscribe(
       (response) => {
         console.log('User edited successfully:', response);
         this.router.navigate(['/view-users']).then(()=>{

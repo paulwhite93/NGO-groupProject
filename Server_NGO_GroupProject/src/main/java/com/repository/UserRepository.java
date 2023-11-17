@@ -19,8 +19,12 @@ public interface UserRepository extends JpaRepository<Users,Integer>{
 	Users findByEmailPassword(@Param(value="email") String email,@Param(value="password") String password);
 
 	@Transactional
-	@Query(value="update users set firstname=:firstname,lastname=:lastname, password=:password, email=:email, role_id=:role_id where id=:id",nativeQuery=true)
+	@Query(value="update users set firstname=:firstname,lastname=:lastname, email=:email, role_id=:role_id where id=:id",nativeQuery=true)
 	@Modifying
-	void updateById(@Param(value="id")int id,@Param(value="firstname")String firstname,@Param(value="lastname")String lastname, @Param(value="email")String email, @Param(value="password")String password, @Param(value="role_id")int role_id);
+	void updateById(@Param(value="id")int id,
+					@Param(value="firstname")String firstname,
+					@Param(value="lastname")String lastname, 
+					@Param(value="email")String email, 
+					@Param(value="role_id")int role_id);
 	
 }

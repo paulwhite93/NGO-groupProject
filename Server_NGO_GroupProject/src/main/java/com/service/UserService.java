@@ -41,9 +41,10 @@ public class UserService {
 
 	public Optional<Users> updateUser(int id,Users users) {
 		// TODO Auto-generated method stub	
+		System.out.println(users.toString());
 		if(ur.findById(id)==null) return null;
-		String password=bCryptPasswordEncoder.encode(users.getPassword());
-		ur.updateById(id,users.getFirstname(),users.getLastname(),users.getEmail(),password,users.getRoles().getId());
+		//String password=bCryptPasswordEncoder.encode(users.getPassword());
+		ur.updateById(id,users.getFirstname(),users.getLastname(),users.getEmail(),users.getRoles().getId());
 		return ur.findById(id);
 		
 	}
