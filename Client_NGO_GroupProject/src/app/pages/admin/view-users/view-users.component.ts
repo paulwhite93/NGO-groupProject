@@ -71,9 +71,9 @@ export class ViewUsersComponent implements AfterViewInit {
     firstname: new FormControl(),
     lastname: new FormControl(),
     email: new FormControl(),
-    role: new FormGroup({
+    roles: new FormGroup({
       id: new FormControl(),
-      name: new FormControl(),
+      role_name: new FormControl(),
     }),
   });
 
@@ -127,14 +127,14 @@ export class ViewUsersComponent implements AfterViewInit {
     // console.log(editedUser);
     // editedUser.id = baseUser?.id;
     // console.log('Edited user:' + editedUser);
-    let id = editUser.role?.id;
-    let name = editUser.role?.name;
+    let id = editUser.roles?.id;
+    let name = editUser.roles?.role_name;
     this.userService.updateUser({
       id:editUser.id,
       firstname:editUser.firstname,
       lastname:editUser.lastname,
       email:editUser.email,
-      role:{
+      roles:{
         id:id,
         role_name:name
       }
