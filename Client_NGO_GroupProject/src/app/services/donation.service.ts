@@ -9,7 +9,7 @@ import { DonationType } from '../Model/DonationType';
 })
 export class DonationService {
   constructor(private http:HttpClient){}
-  private baseUrl = `http://localhost:8080/dono`;
+  private baseUrl = `http://50.47.240.35:8080/NGO_GroupProject/dono`;
 
   public retrieveDonationTypes(): Observable<DonationType[]>{
     return this.http.get<DonationType[]>(this.baseUrl+'/displayDonationType');

@@ -4,7 +4,7 @@
   <artifactId>Server</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>Server</name>
-  
+  <packaging>war</packaging>
   <dependencies>
 	<dependency>
     	<groupId>org.springframework.boot</groupId>
@@ -69,10 +69,20 @@
             <artifactId>jjwt-jackson</artifactId>
             <version>0.11.5</version>
         </dependency>
-<dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 			<version>2.4.6</version>
 		</dependency>
-  </dependencies>
+		<dependency>
+		   <groupId>org.springframework.boot</groupId>
+		   <artifactId>spring-boot-starter-tomcat</artifactId>
+		   <version>2.4.6</version>
+		   <scope>provided</scope>
+		</dependency>
+  </dependencies>		
+	  
+	<build>
+	    <finalName>NGO_GroupProject</finalName>
+	</build>
 </project>

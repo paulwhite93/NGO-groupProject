@@ -2,6 +2,7 @@ package com.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -26,7 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 		if(user==null) {
 			throw new UsernameNotFoundException("User not Found",null);
 		}
-		return new User(user.getEmail(),user.getPassword(),(Collection<? extends GrantedAuthority>) new ArrayList<>());
+		return new User(user.getEmail(),user.getPassword(),(Collection<? extends GrantedAuthority>) Collections.emptyList());
 	}
 
 }

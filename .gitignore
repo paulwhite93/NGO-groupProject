@@ -3,3 +3,4 @@ Server_NGO_GroupProject/src/main/resources/application.properties
 Server_NGO_GroupProject/target/classes/application.properties
 Server_NGO_GroupProject/target/classes/application.properties
 *.properties
+*.properties

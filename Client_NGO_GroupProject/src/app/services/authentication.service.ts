@@ -10,10 +10,10 @@ export class AuthenticationService {
   constructor(private http:HttpClient,private router:Router) { }
   
   postLogin(cred:any){
-    return this.http.post("http://localhost:8080/user/login",cred);
+    return this.http.post("http://50.47.240.35:8080/NGO_GroupProject/user/login",cred);
   }
   getCredentials(cred:any){
-    return this.http.post("http://localhost:8080/authentication",cred);
+    return this.http.post("http://50.47.240.35:8080/NGO_GroupProject/authentication",cred);
   }
   logout(){
     localStorage.clear();

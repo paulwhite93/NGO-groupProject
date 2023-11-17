@@ -134,7 +134,7 @@ export class ViewUsersComponent implements AfterViewInit {
       firstname:editUser.firstname,
       lastname:editUser.lastname,
       email:editUser.email,
-      role:{
+      roles:{
         id:id,
         role_name:name
       }

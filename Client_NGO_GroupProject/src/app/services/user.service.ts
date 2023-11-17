@@ -9,7 +9,7 @@ import { User } from '../Model/User';
 export class UserService {
 
   constructor(private httpClient:HttpClient) { }
-  private baseUrl = 'http://localhost:8080/user';
+  private baseUrl = 'http://50.47.240.35:8080/NGO_GroupProject/user';
 
   public addUser(user:any):Observable<any>{
     /* 
