@@ -33,6 +33,9 @@ export class UserService {
   public deleteUser(userId:Number):Observable<any>{
     return this.httpClient.delete(this.baseUrl+'/delete/'+userId);
   }
+  public deleteUserJson(userId:Number,options?: any):Observable<any>{
+    return this.httpClient.delete(this.baseUrl+'/delete/'+userId, options);
+  }
 
   public updateUser(user:User):Observable<any>{
     return this.httpClient.put(this.baseUrl+'/update/'+user.id,user);

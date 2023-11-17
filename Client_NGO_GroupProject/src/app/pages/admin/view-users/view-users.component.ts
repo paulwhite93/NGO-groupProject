@@ -16,6 +16,7 @@ import {
 } from '@angular/animations';
 import { User } from 'src/app/Model/User';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-users',
@@ -48,7 +49,7 @@ export class ViewUsersComponent implements AfterViewInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
-  constructor(private dialog: MatDialog, private userService: UserService) {
+  constructor(private router:Router, private dialog: MatDialog, private userService: UserService) {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource<User>();
     // expandedUser: DonationData | null = null;
@@ -104,7 +105,7 @@ export class ViewUsersComponent implements AfterViewInit {
         '<br><b>email: </b> ' +
         user.email +
         '<br><b>role: </b>' +
-        user.role,
+        user.roles.role_name,
     };
 
     console.log(user);
@@ -117,9 +118,11 @@ export class ViewUsersComponent implements AfterViewInit {
       if (result) {
         // Implement the logic for deleting the user
         console.log('Deleting user:', user);
-        this.userService.deleteUser(user.id).subscribe(
+
+        this.userService.deleteUserJson(user.id, { responseType: 'text' }).subscribe(
           (response) => {
             console.log('User deleted successfully:', response);
+            this.dataSource.data = this.dataSource.data.filter(u => u.id !== user.id);
           },
           (error) => {
             console.error('Error deleting user:', error);
