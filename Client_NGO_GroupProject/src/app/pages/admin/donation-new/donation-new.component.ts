@@ -17,18 +17,14 @@ export class DonationNewComponent {
   }
 
   onSubmit(f:NgForm){
-    //False wouldn't be set otherwise
-    if (!f.value.donation_enabled) {
-      f.value.donation_enabled = false;
-    }
-    if (!f.value.donation_recurring) {
-      f.value.donation_recurring = false;
-    }
     console.log(f.value)
    
-    this.dataService.addDonationType(f.value).subscribe(data => {
+    //Donation type Json needed because of the response from server
+    this.dataService.addDonationTypeJson(f.value, { responseType: 'text' }).subscribe(data => {
+      console.log(data); // "Donor Type added"
       this.router.navigate(["/admin/add-donation"]);
     });
+    
     
   }
 }

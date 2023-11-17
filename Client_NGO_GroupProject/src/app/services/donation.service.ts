@@ -38,6 +38,11 @@ export class DonationService {
   public addDonationType(donationType:DonationType):Observable<any>{
     return this.http.post(this.baseUrl+'/addDonationType',donationType);
   }
+  addDonationTypeJson(donationType:DonationType, options?: any): Observable<any> {
+    return this.http.post(this.baseUrl+'/addDonationType',donationType, options);
+    
+  }
+  
   public getDonations():Observable<any>{
     return this.http.get(this.baseUrl+'/display');
   }

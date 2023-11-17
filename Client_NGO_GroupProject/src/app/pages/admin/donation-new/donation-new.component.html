@@ -4,15 +4,12 @@
     <form (ngSubmit)="onSubmit(f)" #f="ngForm" >
         <mat-form-field>
             <mat-label>Donation Type Name</mat-label>
-            <input matInput placeholder="Ex. General Donation" name="donation_type" ngModel 
+            <input matInput placeholder="Ex. General Donation" name="type_name" ngModel 
             #fname="ngModel"
             required #input>
         </mat-form-field>
         <br>
-        <mat-checkbox class="example-margin" name="donation_enabled" ngModel 
-        #fname="ngModel">Enabled?</mat-checkbox>
-        &nbsp;
-        <mat-checkbox class="example-margin" name="donation_recurring"
+        <mat-checkbox class="example-margin" name="reoccurrence"
         ngModel 
         #fname="ngModel" >Recurring?</mat-checkbox>
         &nbsp;
