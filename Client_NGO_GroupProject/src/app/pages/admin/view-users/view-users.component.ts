@@ -15,9 +15,15 @@ import {
   trigger,
 } from '@angular/animations';
 import { User } from 'src/app/Model/User';
-import { UserRole } from "src/app/Model/UserRole";
+import { UserRole } from 'src/app/Model/UserRole';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-view-users',
@@ -37,8 +43,8 @@ import { Router } from '@angular/router';
 export class ViewUsersComponent implements AfterViewInit {
   displayedColumns: string[] = [
     'id',
-    'first_name',
-    'last_name',
+    'firstname',
+    'lastname',
     'email',
     'role',
     'edit',
@@ -50,20 +56,36 @@ export class ViewUsersComponent implements AfterViewInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
-  constructor(private router:Router, private dialog: MatDialog, private userService: UserService) {
+  constructor(
+    private router: Router,
+    private dialog: MatDialog,
+    private userService: UserService,
+    private fb: FormBuilder
+  ) {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource<User>();
   }
 
+  editUserForm = new FormGroup({
+    id: new FormControl(),
+    firstname: new FormControl(),
+    lastname: new FormControl(),
+    email: new FormControl(),
+    role: new FormGroup({
+      id: new FormControl(),
+      name: new FormControl(),
+    }),
+  });
+
   ngOnInit() {
     this.userService.getUsers().subscribe({
       next: (data: User[]) => {
-        console.log("Printing Users: ", data);
+        console.log('Printing Users: ', data);
         this.dataSource.data = data;
       },
       error: () => {
-        console.error("Error retrieving Users");
-      }
+        console.error('Error retrieving Users');
+      },
     });
   }
 
@@ -83,29 +105,44 @@ export class ViewUsersComponent implements AfterViewInit {
 
   expandedUser: User | null = null;
 
-  editedUser: User = {
-    first_name: '',
-    last_name: '',
-    email: '',
-    role: {id: 1, name: "user"} as UserRole, 
-};
-get editedUserRoleName(): string {
-  return this.editedUser?.role?.name || '';
-}
-  editUser(user: User) {
-    this.expandedUser = this.expandedUser === user ? null : user;
-    // Implement the logic for editing a user
-    //if there are no edits to the fields, then set as default
-    if(user.email=''){
+  editUser() {
+    const baseUser = this.expandedUser;
+    const editUser = this.editUserForm.value;
 
-    }
-    console.log('Editing user:', user);
-    console.log(this.expandedUser);
+    //always set the edit to the same id
+    editUser.id = baseUser?.id;
+
+    if (editUser.firstname == null || editUser.firstname == undefined)
+      editUser.firstname = baseUser?.firstname;
+    if (editUser.lastname == null || editUser.lastname == undefined)
+      editUser.lastname = baseUser?.lastname;
+    if (editUser.email == null || editUser.email == undefined)
+      editUser.email = baseUser?.email;
     
+
+    console.log(editUser);
+
+    // // Implement the logic for editing a user
+    console.log('Base user:', baseUser);
+    // console.log(editedUser);
+    // editedUser.id = baseUser?.id;
+    // console.log('Edited user:' + editedUser);
+
+    this.userService.updateUser(editUser).subscribe(
+      (response) => {
+        console.log('User edited successfully:', response);
+        this.router.navigate(['/view-users']).then(()=>{
+          window.location.reload();
+        });
+      },
+      (error) => {
+        console.error('Error editing user:', error);
+      }
+    );
   }
-  
+
   expandRow(row: User) {
-    console.log('expandRow called for row:', row);
+    // console.log('expandRow called for row:', row);
     this.expandedUser = this.expandedUser === row ? null : row;
   }
 
@@ -115,9 +152,9 @@ get editedUserRoleName(): string {
       message:
         'Are you sure you want to delete this user? ' +
         '<br><b>name: </b>' +
-        user.first_name +
+        user.firstname +
         ' ' +
-        user.last_name +
+        user.lastname +
         '<br><b>email: </b> ' +
         user.email +
         '<br><b>role: </b>' +
@@ -135,16 +172,19 @@ get editedUserRoleName(): string {
         // Implement the logic for deleting the user
         console.log('Deleting user:', user);
 
-        this.userService.deleteUserJson(user.id, { responseType: 'text' }).subscribe(
-          (response) => {
-            console.log('User deleted successfully:', response);
-            this.dataSource.data = this.dataSource.data.filter(u => u.id !== user.id);
-          },
-          (error) => {
-            console.error('Error deleting user:', error);
-          }
-        );
-        
+        this.userService
+          .deleteUserJson(user.id, { responseType: 'text' })
+          .subscribe(
+            (response) => {
+              console.log('User deleted successfully:', response);
+              this.dataSource.data = this.dataSource.data.filter(
+                (u) => u.id !== user.id
+              );
+            },
+            (error) => {
+              console.error('Error deleting user:', error);
+            }
+          );
       }
     });
   }

@@ -18,13 +18,13 @@ first name, last name, email, password (this was on document, but I don't think 
         </ng-container>
 
         <!-- Last Name Column -->
-        <ng-container matColumnDef="last_name">
+        <ng-container matColumnDef="lastname">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
             <td mat-cell *matCellDef="let row"> {{row.lastname}} </td>
         </ng-container>
 
         <!-- First Name Column -->
-        <ng-container matColumnDef="first_name">
+        <ng-container matColumnDef="firstname">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
             <td mat-cell *matCellDef="let row"> {{row.firstname}} </td>
         </ng-container>
@@ -63,35 +63,36 @@ first name, last name, email, password (this was on document, but I don't think 
             <td mat-cell *matCellDef="let row" [attr.colspan]="displayedColumns.length">
                 <div class="example-element-detail" [@detailExpand]="row === expandedUser ? 'expanded' : 'collapsed'">
                     <div class="example-element-description">
-                        <div class="example-container">
+                        <div class="example-container" [formGroup]="editUserForm">
+                            
                             <mat-form-field>
                                 <mat-label>First Name</mat-label>
-                                <input matInput [(ngModel)]="editedUser.first_name" value="{{row.firstname}}">
-                                <!-- <mat-hint align="end">{{input.value.length}}/10</mat-hint> -->
+                                <input matInput formControlName="firstname" value="{{row.firstname}}">
                             </mat-form-field>
                             &nbsp;
                             <mat-form-field>
                                 <mat-label>Last Name</mat-label>
-                                <input matInput [(ngModel)]="editedUser.last_name" value="{{row.lastname}}">
+                                <input matInput formControlName="lastname" value="{{row.lastname}}">
                             </mat-form-field>
                             &nbsp;
                             <mat-form-field>
                                 <mat-label>Email</mat-label>
-                                <input matInput [(ngModel)]="editedUser.email" value="{{row.email}}" type="email">
-                              </mat-form-field>
+                                <input matInput formControlName="email" type="email" value="{{row.email}}">
+                            </mat-form-field>
                             &nbsp;
                             <mat-form-field>
                                 <mat-label>Role</mat-label>
-                                <mat-select [(ngModel)]="editedUser.role">
-                                    <mat-option value="user">User</mat-option>
-                                    <mat-option value="admin">Admin</mat-option>
+                                <mat-select formControlName="role">
+                                    <mat-option [value]="{ id: '1', name: 'user' }">User</mat-option>
+                                    <mat-option [value]="{ id: '2', name: 'admin' }">Admin</mat-option>
                                 </mat-select>
                             </mat-form-field>
                             &nbsp;
-                            <button mat-button (click)="editUser(editedUser)">Save</button>
+                            <button mat-button (click)="editUser()">Save</button>
                             &nbsp;
                             <button mat-button color="warn" (click)="expandRow(row); $event.stopPropagation()">Cancel</button>
                         </div>
+                        
                     </div>
                 </div>
             </td>
