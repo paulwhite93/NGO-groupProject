@@ -138,17 +138,18 @@ export class ViewUsersComponent implements AfterViewInit {
         id:id,
         role_name:name
       }
-    }).subscribe(
-      (response) => {
+    }).subscribe({
+      next:(response) => {
         console.log('User edited successfully:', response);
+        ///Modify your datascource table here
         this.router.navigate(['/view-users']).then(()=>{
           window.location.reload();
         });
       },
-      (error) => {
+      error:(error) => {
         console.error('Error editing user:', error);
       }
-    );
+    });
   }
 
   expandRow(row: User) {
