@@ -5,16 +5,16 @@
             
             <button mat-list-item routerLink="/user">
                 <mat-icon mat-list-icon>home</mat-icon>
-                Home
+                <div class="label"> Home </div>
             </button>
             <button mat-list-item routerLink="/user/donor">
                 <mat-icon mat-list-icon>card_giftcard</mat-icon>
-                Make a Donation
+                <div class="label"> Make a Donation </div>
             </button>
             <!-- (click)="logout()" *ngIf="isLoggedIn" -->
             <button mat-list-item routerLink="/">
                 <mat-icon mat-list-icon>logout</mat-icon>
-                Log out
+                <div class="label"> Log out </div>
             </button>
         </mat-action-list>
     </mat-card>

@@ -5,25 +5,25 @@
             
             <button mat-list-item routerLink="/admin">
                 <mat-icon mat-list-icon>home</mat-icon>
-                Home
+                <div class="label"> Home </div>
             </button>
             <button mat-list-item routerLink="/admin/add-donation">
                 <mat-icon mat-list-icon>add_circle</mat-icon>
-                Add Donation Types
+                <div class="label"> Add Donation Types </div>
             </button>
             <button mat-list-item routerLink="/admin/view-donations">
                 <mat-icon mat-list-icon>list</mat-icon>
-                View Donations
+                <div class="label"> View Donations </div>
             </button>
             <button mat-list-item routerLink="/admin/view-users">
-                <mat-icon mat-list-icon>edit_note</mat-icon>
-                View Users
+                <mat-icon mat-list-icon>list</mat-icon>
+                <div class="label"> View Users </div>
             </button>
 
             <!-- (click)="logout()" *ngIf="isLoggedIn" -->
             <button mat-list-item>
                 <mat-icon mat-list-icon>logout</mat-icon>
-                Log out
+                <div class="label"> Log out </div>
             </button>
         </mat-action-list>
     </mat-card>
