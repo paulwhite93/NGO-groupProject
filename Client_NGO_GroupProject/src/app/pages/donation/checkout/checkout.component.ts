@@ -17,6 +17,15 @@ export class CheckoutComponent {
     private donationService:DonationService){}
 
   ngOnInit(){
+    this.buildCart();
+    if(this.shoppingCart){
+
+    }
+    else{
+      this.router.navigate(['']);
+    }
+  }
+  buildCart(){
     let data:any = localStorage.getItem('shoppingCart');
     data = JSON.parse(data);
     console.log(data);
@@ -30,9 +39,6 @@ export class CheckoutComponent {
         monthlyTotal:this.getCartMonthlyTotal(data),
       }
       console.log(this.shoppingCart);
-    }
-    else{
-      this.router.navigate(['']);
     }
   }
   getCartTotal(data:any):Number{
@@ -71,15 +77,14 @@ export class CheckoutComponent {
     this.shoppingCart.items.splice(this.shoppingCart.items.indexOf(item),1);
     console.log(this.shoppingCart.items);
     localStorage.setItem('shoppingCart', JSON.stringify(this.shoppingCart.items));
-    this.router.navigate(['checkout']).then(()=>{
-      window.location.reload();
-    });
+    //rebuild shoppingCart
+    this.buildCart();
   }
   proceedToCheckout(){
     //save all Donation records
     //return to home page
     //send email to user_email 
-    let donorEmail = this.shoppingCart.items[0].donor.email;
+    //let donorEmail = this.shoppingCart.items[0].donor.email;
     this.shoppingCart.items.forEach((item:Donation)=>{
       this.donationService.postDonation(item).subscribe({
         next: (data:any)=>{
