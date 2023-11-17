@@ -18,7 +18,6 @@ export class AddDonationComponent implements AfterViewInit {
     'donation_recurring'
   ];
   dataSource: MatTableDataSource<DonationType>;
-  expandedDonation: DonationType | null = null;
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
@@ -51,12 +50,6 @@ export class AddDonationComponent implements AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-  }
-
-  editDonation(donation: DonationType) {
-    this.expandedDonation = this.expandedDonation === donation ? null : donation;
-    // Implement the logic for editing a donation
-    console.log('Editing donation:', donation);
   }
 
   deleteDonation(donation: DonationType) {
