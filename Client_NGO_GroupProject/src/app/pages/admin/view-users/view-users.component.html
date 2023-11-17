@@ -66,30 +66,29 @@ first name, last name, email, password (this was on document, but I don't think 
                         <div class="example-container">
                             <mat-form-field>
                                 <mat-label>First Name</mat-label>
-                                <input matInput #input value="{{row.firstname}}">
+                                <input matInput [(ngModel)]="editedUser.first_name" value="{{row.firstname}}">
                                 <!-- <mat-hint align="end">{{input.value.length}}/10</mat-hint> -->
                             </mat-form-field>
                             &nbsp;
                             <mat-form-field>
                                 <mat-label>Last Name</mat-label>
-                                <input matInput #input value="{{row.lastname}}">
+                                <input matInput [(ngModel)]="editedUser.last_name" value="{{row.lastname}}">
                             </mat-form-field>
                             &nbsp;
                             <mat-form-field>
                                 <mat-label>Email</mat-label>
-                                <input matInput #input value="{{row.email}}" type="email">
-                                <!-- <mat-hint align="end">{{input.value.length}}/10</mat-hint> -->
+                                <input matInput [(ngModel)]="editedUser.email" value="{{row.email}}" type="email">
                               </mat-form-field>
                             &nbsp;
                             <mat-form-field>
                                 <mat-label>Role</mat-label>
-                                <mat-select>
-                                    <mat-option value="User">User</mat-option>
-                                    <mat-option value="Admin">Admin</mat-option>
+                                <mat-select [(ngModel)]="editedUser.role">
+                                    <mat-option value="user">User</mat-option>
+                                    <mat-option value="admin">Admin</mat-option>
                                 </mat-select>
                             </mat-form-field>
                             &nbsp;
-                            <button mat-button>Save</button>
+                            <button mat-button (click)="editUser(editedUser)">Save</button>
                             &nbsp;
                             <button mat-button color="warn" (click)="expandRow(row); $event.stopPropagation()">Cancel</button>
                         </div>

@@ -15,6 +15,7 @@ import {
   trigger,
 } from '@angular/animations';
 import { User } from 'src/app/Model/User';
+import { UserRole } from "src/app/Model/UserRole";
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 
@@ -52,7 +53,6 @@ export class ViewUsersComponent implements AfterViewInit {
   constructor(private router:Router, private dialog: MatDialog, private userService: UserService) {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource<User>();
-    // expandedUser: DonationData | null = null;
   }
 
   ngOnInit() {
@@ -80,12 +80,28 @@ export class ViewUsersComponent implements AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
   expandedUser: User | null = null;
 
+  editedUser: User = {
+    first_name: '',
+    last_name: '',
+    email: '',
+    role: {id: 1, name: "user"} as UserRole, 
+};
+get editedUserRoleName(): string {
+  return this.editedUser?.role?.name || '';
+}
   editUser(user: User) {
     this.expandedUser = this.expandedUser === user ? null : user;
     // Implement the logic for editing a user
+    //if there are no edits to the fields, then set as default
+    if(user.email=''){
+
+    }
     console.log('Editing user:', user);
+    console.log(this.expandedUser);
+    
   }
   
   expandRow(row: User) {
