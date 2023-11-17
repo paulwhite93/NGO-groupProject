@@ -26,8 +26,9 @@ public class DonationController {
 	DonorService donorService;
 	
 	@RequestMapping(value="/addDonation",method=RequestMethod.POST)
-	public ResponseEntity<String> adddonation(@RequestBody List<Donations> donation) {
-		donationService.addDonation(donation);		
+	public ResponseEntity<String> adddonation(@RequestBody Donations donation) {
+		System.out.println(donation);
+		donationService.addDonation(donation);
 		return new ResponseEntity<>("Donation and donor added", HttpStatus.OK);
 	}
 
