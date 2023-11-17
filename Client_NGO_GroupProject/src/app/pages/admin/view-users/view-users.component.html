@@ -82,9 +82,9 @@ first name, last name, email, password (this was on document, but I don't think 
                             &nbsp;
                             <mat-form-field>
                                 <mat-label>Role</mat-label>
-                                <mat-select formControlName="role">
-                                    <mat-option [value]="{ id: 2, name: 'user' }">User</mat-option>
-                                    <mat-option [value]="{ id: 1, name: 'admin' }">Admin</mat-option>
+                                <mat-select formControlName="roles">
+                                    <mat-option [value]="{ id: 2, role_name: 'user' }">User</mat-option>
+                                    <mat-option [value]="{ id: 1, role_name: 'admin' }">Admin</mat-option>
                                 </mat-select>
                             </mat-form-field>
                             &nbsp;
