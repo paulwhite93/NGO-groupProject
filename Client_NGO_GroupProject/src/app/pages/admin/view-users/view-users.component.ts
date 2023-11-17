@@ -14,35 +14,9 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-export interface DonationData {
-  id: string;
-  first_name: string;
-  last_name: string;
-  email: string;
-  role: string;
-}
+import { User } from 'src/app/Model/User';
+import { UserService } from 'src/app/services/user.service';
 
-const NAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
 @Component({
   selector: 'app-view-users',
   templateUrl: './view-users.component.html',
@@ -68,18 +42,28 @@ export class ViewUsersComponent implements AfterViewInit {
     'edit',
     'delete',
   ];
-  dataSource: MatTableDataSource<DonationData>;
-  expandedDonation: DonationData | null = null;
+
+  dataSource: MatTableDataSource<User>;
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
-  constructor(private dialog: MatDialog) {
-    // Create 50 users
-    const users = Array.from({ length: 50 }, (_, k) => createNewUser(k + 1));
-
+  constructor(private dialog: MatDialog, private userService: UserService) {
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+    this.dataSource = new MatTableDataSource<User>();
+    // expandedUser: DonationData | null = null;
+  }
+
+  ngOnInit() {
+    this.userService.getUsers().subscribe({
+      next: (data: User[]) => {
+        console.log("Printing Users: ", data);
+        this.dataSource.data = data;
+      },
+      error: () => {
+        console.error("Error retrieving Users");
+      }
+    });
   }
 
   ngAfterViewInit() {
@@ -95,14 +79,17 @@ export class ViewUsersComponent implements AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  editUser(user: DonationData) {
-    this.expandedDonation = this.expandedDonation === user ? null : user;
+  expandedUser: User | null = null;
+
+  editUser(user: User) {
+    this.expandedUser = this.expandedUser === user ? null : user;
     // Implement the logic for editing a user
     console.log('Editing user:', user);
   }
-  expandRow(row: DonationData) {
+  
+  expandRow(row: User) {
     console.log('expandRow called for row:', row);
-    this.expandedDonation = this.expandedDonation === row ? null : row;
+    this.expandedUser = this.expandedUser === row ? null : row;
   }
 
   deleteUser(user: any) {
@@ -130,21 +117,16 @@ export class ViewUsersComponent implements AfterViewInit {
       if (result) {
         // Implement the logic for deleting the user
         console.log('Deleting user:', user);
+        this.userService.deleteUser(user.id).subscribe(
+          (response) => {
+            console.log('User deleted successfully:', response);
+          },
+          (error) => {
+            console.error('Error deleting user:', error);
+          }
+        );
+        
       }
     });
   }
-}
-
-/** Builds and returns a new User. */
-function createNewUser(id: number): DonationData {
-  const firstname = NAMES[Math.round(Math.random() * (NAMES.length - 1))];
-  const lastname = NAMES[Math.round(Math.random() * (NAMES.length - 1))];
-  const name = firstname + lastname;
-  return {
-    id: id.toString(),
-    first_name: firstname,
-    last_name: lastname,
-    email: name + '@gmail.com',
-    role: Math.random() * 1000 > 500 ? 'Admin' : 'User',
-  };
 }

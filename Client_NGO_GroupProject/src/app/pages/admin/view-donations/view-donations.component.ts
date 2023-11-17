@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { DonationData } from '../view-users/view-users.component';
+import { Donation } from 'src/app/Model/Donation';
 import { DonationService } from 'src/app/services/donation.service';
 
 
@@ -13,7 +13,7 @@ import { DonationService } from 'src/app/services/donation.service';
 })
 export class ViewDonationsComponent implements AfterViewInit {
   displayedColumns: string[] = ['id', 'donation_user', 'donation_date', 'donation_amount', 'donation_type'];
-  dataSource: MatTableDataSource<DonationData>;
+  dataSource: MatTableDataSource<Donation>;
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
@@ -21,16 +21,16 @@ export class ViewDonationsComponent implements AfterViewInit {
 
   constructor(private donationService: DonationService) {
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource<DonationData>();
+    this.dataSource = new MatTableDataSource<Donation>();
   }
   ngOnInit() {
     this.donationService.getDonations().subscribe({
-      next: (data: DonationData[]) => {
-        console.log("Printing Donation Types: ", data);
+      next: (data: Donation[]) => {
+        console.log("Printing Donations: ", data);
         this.dataSource.data = data;
       },
       error: () => {
-        console.error("Error retrieving Donation Types");
+        console.error("Error retrieving Donations");
       }
     });
   }
@@ -42,7 +42,7 @@ export class ViewDonationsComponent implements AfterViewInit {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    console.log('Filter Value:', filterValue); // Check the filterValue in the console
+    console.log('Filter Value:', filterValue);
     this.dataSource.filter = filterValue.trim().toLowerCase();
   
     if (this.dataSource.paginator) {
