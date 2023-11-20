@@ -36,8 +36,11 @@ public donor!: Donator;
         console.log("Printing Donation Types: "+data);
         this.buildDonationMap(data);
       },
-      error:()=>{
-
+      error:(error:any)=>{
+        if(error.status == 403){
+          alert("User Session has expried Please Login again");
+          this.router.navigate(['/login']);
+        }
       }
     });
     

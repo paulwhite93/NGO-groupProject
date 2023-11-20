@@ -27,12 +27,17 @@ export class DonationNewComponent {
     this.dataService
       .addDonationTypeJson(f.value, { responseType: 'text' })
       .subscribe((data) => {
-        console.log(data); // "Donor Type added"
+        console.log(data); // "Donor Type added"          
+        if(data.status == 403){
+            alert("User Session has expried Please Login again");
+            this.router.navigate(['/login']);
+          }
         this.router
           .navigateByUrl('/', { skipLocationChange: true })
           .then(() => {
             this.router.navigate(['/admin/add-donation']);
           });
+
       });
   }
 }

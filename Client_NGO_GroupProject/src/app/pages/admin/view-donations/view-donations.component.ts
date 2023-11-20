@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Donation } from 'src/app/Model/Donation';
 import { DonationService } from 'src/app/services/donation.service';
 
@@ -19,7 +20,7 @@ export class ViewDonationsComponent implements AfterViewInit {
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
   
 
-  constructor(private donationService: DonationService) {
+  constructor(private donationService: DonationService,private router:Router) {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource<Donation>();
   }
@@ -29,8 +30,12 @@ export class ViewDonationsComponent implements AfterViewInit {
         console.log("Printing Donations: ", data);
         this.dataSource.data = data;
       },
-      error: () => {
+      error: (error:any) => {
         console.error("Error retrieving Donations");
+        if(error.status == 403){
+          alert("User Session has expried Please Login again");
+          this.router.navigate(['/login']);
+        }
       }
     });
   }

@@ -146,6 +146,10 @@ export class ViewUsersComponent implements AfterViewInit {
           console.log('User edited successfully:', error);
           this.router.navigateByUrl('/',{skipLocationChange:true}).then(()=>{this.router.navigate(['/admin/view-users'])})
         }
+        else if(error.status == 403){
+          alert("User Session has expried Please Login again");
+          this.router.navigate(['/login']);
+        }
         else{
           console.error('Error editing user:', error);
         }

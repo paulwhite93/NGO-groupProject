@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { DonationType } from 'src/app/Model/DonationType';
 import { DonationService } from 'src/app/services/donation.service';
 
@@ -22,7 +23,7 @@ export class AddDonationComponent implements AfterViewInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
-  constructor(private dialog: MatDialog, private donationService: DonationService) {
+  constructor(private dialog: MatDialog, private donationService: DonationService,private router:Router) {
     this.dataSource = new MatTableDataSource<DonationType>();
   }
 
@@ -32,8 +33,12 @@ export class AddDonationComponent implements AfterViewInit {
         console.log("Printing Donation Types: ", data);
         this.dataSource.data = data;
       },
-      error: () => {
+      error: (error:any) => {
         console.error("Error retrieving Donation Types");
+        if(error.status == 403){
+          alert("User Session has expried Please Login again");
+          this.router.navigate(['/login']);
+        }
       }
     });
   }
