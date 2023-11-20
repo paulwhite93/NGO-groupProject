@@ -139,17 +139,30 @@ export class ViewUsersComponent implements AfterViewInit {
         role_name:name
       }
     }).subscribe({
-      next:(response) => {
-        console.log('User edited successfully:', response);
-        ///Modify your datascource table here
-        this.router.navigate(['/view-users']).then(()=>{
-          window.location.reload();
-        });
-      },
       error:(error) => {
-        console.error('Error editing user:', error);
+        if(error.status == 200){
+          //user edited successfully
+          ///Modify your datascource table here
+          console.log('User edited successfully:', error);
+          this.router.navigateByUrl('/',{skipLocationChange:true}).then(()=>{this.router.navigate(['/admin/view-users'])})
+        }
+        else{
+          console.error('Error editing user:', error);
+        }
       }
     });
+  }
+
+  modifyUser(user:any){
+    //update user in table of the same id as the one in EditUserForm
+    for(let i = 0; i < this.dataSource.data.length; i++){
+      let id:any = this.dataSource.data[i].id;
+      console.log(this.dataSource.data[i].id," ",user.id);
+      if (id == user.id){   
+      console.log("updating user: "+this.dataSource.data[i]) 
+        this.dataSource.data[i] = user;
+      }
+    }
   }
 
   expandRow(row: User) {

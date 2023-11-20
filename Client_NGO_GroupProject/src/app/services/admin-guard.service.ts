@@ -24,10 +24,10 @@ export class AdminGuardService {
   | Promise <boolean | UrlTree>
   | boolean
   | UrlTree {
-  if (this.auth.isLoggedIn() && this.auth.isAdmin()) {
-    return true;
+    if (this.auth.isLoggedIn() && this.auth.isAdmin()) {
+      return true;
+    }
+    this.router.navigate(['login']);
+    return false;
   }
-  this.router.navigate(['login']);
-  return false;
-}
 }
