@@ -33,4 +33,6 @@ public class Donation_Types {
     private Set<Donations> donations;
 	@Column
 	private boolean reoccurrence;
+	@Column
+	private String image_url;
 }
