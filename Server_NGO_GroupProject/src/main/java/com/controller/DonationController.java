@@ -24,7 +24,7 @@ public class DonationController {
 	DonationService donationService;
 	@Autowired
 	DonorService donorService;
-	
+	public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/uploads";
 	@RequestMapping(value="/addDonation",method=RequestMethod.POST)
 	public ResponseEntity<String> adddonation(@RequestBody Donations donation) {
 		System.out.println(donation);
@@ -47,9 +47,30 @@ public class DonationController {
 	}
 	
 	@RequestMapping(value="/addDonationType",method=RequestMethod.POST)
-	public ResponseEntity<String> addType(@RequestBody Donation_Types type){
-		donationService.addType(type);
-		return new ResponseEntity<>("Donor Type added", HttpStatus.OK);
+	public ResponseEntity<String> addType(@RequestPart("data") Donation_Types type,@RequestParam("image") MultipartFile file) throws IOException{
+		try {
+	        String directoryPath = UPLOAD_DIRECTORY+"/donationTypeImag";
+	        // Create directories if they do not exist
+	        Files.createDirectories(Paths.get(directoryPath));
+	        String filename = file.getOriginalFilename();
+	        // unique filename
+	        String uniqueFilename = System.currentTimeMillis() + "_" + filename;
+	        String path = directoryPath + "/" + uniqueFilename;
+	        // check image file
+	        String contentType = file.getContentType();
+	        if (contentType != null && contentType.startsWith("image")) {
+	            // Save the file
+	            Files.write(Paths.get(path), file.getBytes());
+	            type.setImage_url(path);
+	            donationService.addType(type);
+
+	            return new ResponseEntity<>("Donor Type added", HttpStatus.OK);
+	        } else {
+	            return new ResponseEntity<>("Invalid file type", HttpStatus.BAD_REQUEST);
+	        }
+	    } catch (Exception e) {
+	        return new ResponseEntity<>("Error adding donation type", HttpStatus.INTERNAL_SERVER_ERROR);
+	    }
 	}
 	
 	@RequestMapping(value="/displayDonationType",method=RequestMethod.GET)
