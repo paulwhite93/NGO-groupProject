@@ -15,8 +15,9 @@ import { RegisterComponent } from './pages/register/register.component';
 import { AdminGuardService } from './services/admin-guard.service';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, pathMatch: 'full' },
-  { path: 'login', component: LoginComponent, pathMatch: 'full' },
+  { path: '', redirectTo: '/home',pathMatch:'full'},
+  { path: 'home', component: HomeComponent,},
+  { path: 'login', component: LoginComponent,},
   { path: 'register', component: RegisterComponent },
   //ADMIN ROUTING
   {

@@ -12,7 +12,7 @@
                 <div class="label"> Make a Donation </div>
             </button>
             <!-- (click)="logout()" *ngIf="isLoggedIn" -->
-            <button mat-list-item routerLink="/">
+            <button mat-list-item (click)="logout()">
                 <mat-icon mat-list-icon>logout</mat-icon>
                 <div class="label"> Log out </div>
             </button>
