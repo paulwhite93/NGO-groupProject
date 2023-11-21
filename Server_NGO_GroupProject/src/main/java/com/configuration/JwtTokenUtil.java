@@ -29,7 +29,7 @@ public class JwtTokenUtil{
 
 	Logger logger = (Logger) LoggerFactory.getLogger(JwtTokenUtil.class);
 	@Value("${jwt.secret-key}")
-    private static String SECRET_KEY="ZXF1aXBtZW50c291dGhmb3J0Y3J5bW9udGhhbnlib2R5YnJpZGdlYWN0aXZlY2FyZWY=";
+    private String SECRET_KEY;
 
     public String extractUseruserEmail(String token) {
     	final Claims claims = extractAllClaims(token);
