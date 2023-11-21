@@ -38,8 +38,15 @@ export class DonationService {
   public addDonationType(donationType:DonationType):Observable<any>{
     return this.http.post(this.baseUrl+'/addDonationType',donationType);
   }
-  addDonationTypeJson(donationType:DonationType, options?: any): Observable<any> {
-    return this.http.post(this.baseUrl+'/addDonationType',donationType, options);
+  addDonationTypeJson(fd:FormData, options?: any): Observable<any> {
+    const donationType = fd.get("data");
+    const image = fd.get("image");
+    console.log("data portion: " + donationType);
+    console.log("image portion: " + image);
+    
+    
+
+    return this.http.post(this.baseUrl+'/addDonationType',fd, options);
     
   }
   
