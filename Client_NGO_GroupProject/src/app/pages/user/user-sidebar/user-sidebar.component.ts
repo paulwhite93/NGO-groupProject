@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
@@ -7,9 +8,9 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   styleUrls: ['./user-sidebar.component.css']
 })
 export class UserSidebarComponent {
-  constructor(public login: AuthenticationService) {}
-  public logout() {
-    this.login.logout();
-    window.location.reload();
+  constructor(public router:Router) {}
+  logout(){
+    localStorage.clear();
+    this.router.navigate(["home"]);
   }
 }

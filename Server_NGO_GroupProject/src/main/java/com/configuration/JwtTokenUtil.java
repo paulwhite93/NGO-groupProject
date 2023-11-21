@@ -31,8 +31,6 @@ public class JwtTokenUtil{
 	@Value("${jwt.secret-key}")
 //    private String SECRET_KEY;
 
-    private static String SECRET_KEY="ZXF1aXBtZW50c291dGhmb3J0Y3J5bW9udGhhbnlib2R5YnJpZGdlYWN0aXZlY2FyZWY=";
-
     public String extractUseruserEmail(String token) {
     	final Claims claims = extractAllClaims(token);
     	return claims.getSubject();

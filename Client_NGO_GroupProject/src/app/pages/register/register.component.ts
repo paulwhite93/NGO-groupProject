@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/Model/User';
 import { UserService } from 'src/app/services/user.service';
@@ -10,10 +10,22 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class RegisterComponent {
   user = new FormGroup({
-    first_name: new FormControl(),
-    last_name: new FormControl(),
+    first_name: new FormControl('',[
+      Validators.required,
+      Validators.maxLength(50),
+      Validators.pattern('^[a-zA-Z ]*$')
+    ]),
+    last_name: new FormControl('',[
+      Validators.required,
+      Validators.maxLength(50),
+      Validators.pattern('^[a-zA-Z ]*$')
+    ]),
     password: new FormControl(),
-    email: new FormControl(),
+    email: new FormControl('',[
+      Validators.required,
+      Validators.maxLength(50),
+      Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")
+    ])
   });
   constructor(
     private userService: UserService, 
