@@ -68,9 +68,21 @@ export class ViewUsersComponent implements AfterViewInit {
 
   editUserForm = new FormGroup({
     id: new FormControl(),
-    firstname: new FormControl(),
-    lastname: new FormControl(),
-    email: new FormControl(),
+    firstname: new FormControl('',[
+      Validators.required,
+      Validators.maxLength(50),
+      Validators.pattern('^[a-zA-Z ]*$')
+    ]),
+    lastname: new FormControl('',[
+      Validators.required,
+      Validators.maxLength(50),
+      Validators.pattern('^[a-zA-Z ]*$')
+    ]),
+    email: new FormControl('',[
+      Validators.required,
+      Validators.maxLength(50),
+      Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")
+    ]),
     roles: new FormGroup({
       id: new FormControl(),
       role_name: new FormControl(),

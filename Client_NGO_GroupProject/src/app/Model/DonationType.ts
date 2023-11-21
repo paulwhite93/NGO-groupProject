@@ -5,4 +5,6 @@ export interface DonationType{
     type_name:string,
     
     reoccurrence:boolean,
+
+    image?:File//file image type? or HTMLImageElement
 }
