@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Donation } from 'src/app/Model/Donation';
 import { DonationType } from 'src/app/Model/DonationType';
 import { Donator } from 'src/app/Model/Donator';
+import { AuthenticationPopUpService } from 'src/app/services/authentication-pop-up.service';
 import { DonationService } from 'src/app/services/donation.service';
 
 @Component({
@@ -14,7 +15,8 @@ import { DonationService } from 'src/app/services/donation.service';
 export class MakeDonationComponent {
 constructor(
   private router:Router,
-  private donationService:DonationService){}
+  private donationService:DonationService,
+  private popUpService:AuthenticationPopUpService){}
 
 public formList = new Map<Donation,FormGroup>();
 public donor!: Donator;
@@ -38,8 +40,7 @@ public donor!: Donator;
       },
       error:(error:any)=>{
         if(error.status == 403){
-          alert("User Session has expried Please Login again");
-          this.router.navigate(['/login']);
+          this.popUpService.openPopUp();
         }
       }
     });

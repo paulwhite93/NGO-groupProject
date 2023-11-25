@@ -5,6 +5,7 @@ import { DonationService } from 'src/app/services/donation.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HttpHeaders } from '@angular/common/http';
 import { DonationType } from 'src/app/Model/DonationType';
+import { AuthenticationPopUpService } from 'src/app/services/authentication-pop-up.service';
 
 @Component({
   selector: 'app-donation-new',
@@ -16,7 +17,8 @@ export class DonationNewComponent {
   constructor(
     public dataService: DonationService,
     private router: Router,
-    private el: ElementRef
+    private el: ElementRef,
+    private popUpService: AuthenticationPopUpService
   ) {}
 
   closeModal() {
@@ -50,8 +52,7 @@ export class DonationNewComponent {
       console.log(data); 
       
       if (data.status == 403) {
-        alert("User Session has expired. Please Login again");
-        this.router.navigate(['/login']);
+        this.popUpService.openPopUp();
       }
   
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {

@@ -27,7 +27,7 @@ import { HTTP_INTERCEPTORS,HttpClientModule } from '@angular/common/http';
 import { InterceptorService } from './services/interceptor.service';
 import { DonationNewComponent } from './pages/admin/donation-new/donation-new.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { AuthenticationPopUpComponent } from './authentication-pop-up/authentication-pop-up.component';
+import { AuthenticationPopUpComponent } from './component/authentication-pop-up/authentication-pop-up.component';
 
 @NgModule({
   declarations: [

@@ -10,6 +10,9 @@
         </div>
         <div class="container" *ngFor="let form of formList | keyvalue">
             <form [formGroup]="form.value" class="row">
+                <div>
+                    {{ form.key.donation_types?.image_url}}
+                </div>
                 <div class="col-5 fw-bold">
                     <p>{{form.key.donation_types.type_name | uppercase}}</p>
                 </div>

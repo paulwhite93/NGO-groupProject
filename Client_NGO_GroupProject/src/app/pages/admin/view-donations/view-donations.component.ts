@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Donation } from 'src/app/Model/Donation';
+import { AuthenticationPopUpService } from 'src/app/services/authentication-pop-up.service';
 import { DonationService } from 'src/app/services/donation.service';
 
 
@@ -20,7 +21,10 @@ export class ViewDonationsComponent implements AfterViewInit {
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
   
 
-  constructor(private donationService: DonationService,private router:Router) {
+  constructor(
+    private donationService: DonationService,
+    private router:Router,
+    private popUpService: AuthenticationPopUpService) {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource<Donation>();
   }
@@ -33,8 +37,7 @@ export class ViewDonationsComponent implements AfterViewInit {
       error: (error:any) => {
         console.error("Error retrieving Donations");
         if(error.status == 403){
-          alert("User Session has expried Please Login again");
-          this.router.navigate(['/login']);
+          this.popUpService.openPopUp();
         }
       }
     });

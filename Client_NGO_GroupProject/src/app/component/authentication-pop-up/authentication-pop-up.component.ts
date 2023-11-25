@@ -11,8 +11,7 @@ export class AuthenticationPopUpComponent {
   constructor(private authenticationService:AuthenticationService){}
   
   confirm():void{
-    this.message = 'Log In';
-    this.authenticationService.logOut();
+    this.authenticationService.logout();
   }
 
 }

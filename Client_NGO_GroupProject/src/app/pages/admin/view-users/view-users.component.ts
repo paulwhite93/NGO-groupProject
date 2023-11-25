@@ -24,6 +24,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { AuthenticationPopUpService } from 'src/app/services/authentication-pop-up.service';
 
 @Component({
   selector: 'app-view-users',
@@ -60,7 +61,8 @@ export class ViewUsersComponent implements AfterViewInit {
     private router: Router,
     private dialog: MatDialog,
     private userService: UserService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private popUpService: AuthenticationPopUpService
   ) {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource<User>();
@@ -159,8 +161,9 @@ export class ViewUsersComponent implements AfterViewInit {
           this.router.navigateByUrl('/',{skipLocationChange:true}).then(()=>{this.router.navigate(['/admin/view-users'])})
         }
         else if(error.status == 403){
-          alert("User Session has expried Please Login again");
-          this.router.navigate(['/login']);
+          this.popUpService.openPopUp();
+          //alert("User Session has expried Please Login again");
+          //this.router.navigate(['/login']);
         }
         else{
           console.error('Error editing user:', error);
