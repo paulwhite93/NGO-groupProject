@@ -40,7 +40,9 @@ export class AddDonationComponent implements AfterViewInit {
       },
       error: (error:any) => {
         console.error("Error retrieving Donation Types");
+        console.log(error);
         if(error.status == 403){
+          console.log("Expired/Bad Authentication token");
           this.popUpService.openPopUp();
         }
       }

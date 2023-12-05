@@ -157,8 +157,18 @@ export class ViewUsersComponent implements AfterViewInit {
         if(error.status == 200){
           //user edited successfully
           ///Modify your datascource table here
+          this.modifyUser({
+            id:editUser.id,
+            firstname:editUser.firstname,
+            lastname:editUser.lastname,
+            email:editUser.email,
+            roles:{
+              id:id,
+              role_name:name
+            }
+          });
           console.log('User edited successfully:', error);
-          this.router.navigateByUrl('/',{skipLocationChange:true}).then(()=>{this.router.navigate(['/admin/view-users'])})
+          //this.router.navigateByUrl('/',{skipLocationChange:true}).then(()=>{this.router.navigate(['/admin/view-users'])})
         }
         else if(error.status == 403){
           this.popUpService.openPopUp();
@@ -172,14 +182,17 @@ export class ViewUsersComponent implements AfterViewInit {
     });
   }
 
+
   modifyUser(user:any){
     //update user in table of the same id as the one in EditUserForm
-    for(let i = 0; i < this.dataSource.data.length; i++){
-      let id:any = this.dataSource.data[i].id;
-      console.log(this.dataSource.data[i].id," ",user.id);
+    const newData = this.dataSource.data;
+    for(let i = 0; i < newData.length; i++){
+      let id:any = newData[i].id;
+      console.log(newData[i].id," ",user.id);
       if (id == user.id){   
-      console.log("updating user: "+this.dataSource.data[i]) 
-        this.dataSource.data[i] = user;
+        console.log("updating user: "+newData[i]) 
+        newData[i] = user;
+        this.dataSource.data = newData;
       }
     }
   }

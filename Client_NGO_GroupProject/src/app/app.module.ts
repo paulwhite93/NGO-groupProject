@@ -28,6 +28,7 @@ import { InterceptorService } from './services/interceptor.service';
 import { DonationNewComponent } from './pages/admin/donation-new/donation-new.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AuthenticationPopUpComponent } from './component/authentication-pop-up/authentication-pop-up.component';
+import { AuthenticationPopUpService } from './services/authentication-pop-up.service';
 
 @NgModule({
   declarations: [
@@ -63,11 +64,17 @@ import { AuthenticationPopUpComponent } from './component/authentication-pop-up/
     MatTooltipModule,
     MatSidenavModule,
   ],
-  providers: [{
+  providers: [
+    {
     provide: HTTP_INTERCEPTORS,
     useClass: InterceptorService,
     multi: true,
-  }],
+  },
+  { 
+    provide: HTTP_INTERCEPTORS, 
+    useClass: AuthenticationPopUpService, 
+    multi: true 
+  },],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
