@@ -15,6 +15,7 @@ import { DonationService } from 'src/app/services/donation.service';
 })
 export class AddDonationComponent implements AfterViewInit {
   displayedColumns: string[] = [
+    'image',
     'id',
     'donation_type',
     'donation_recurring'
