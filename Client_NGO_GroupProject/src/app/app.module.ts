@@ -29,6 +29,8 @@ import { DonationNewComponent } from './pages/admin/donation-new/donation-new.co
 import { RegisterComponent } from './pages/register/register.component';
 import { AuthenticationPopUpComponent } from './component/authentication-pop-up/authentication-pop-up.component';
 import { AuthenticationPopUpService } from './services/authentication-pop-up.service';
+import { ImageComponent } from './component/image/image.component';
+import { NgOptimizedImage } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -51,8 +53,10 @@ import { AuthenticationPopUpService } from './services/authentication-pop-up.ser
     DonationNewComponent,
     RegisterComponent,
     AuthenticationPopUpComponent,
+    ImageComponent,
   ],
   imports: [
+    NgOptimizedImage,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Iterator;
 import java.util.List;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -90,10 +92,18 @@ public class DonationController {
 		return li;
 	}
 	
-	@RequestMapping(value="/getImageByUrl/{url}",method=RequestMethod.GET,produces = MediaType.IMAGE_JPEG_VALUE)
-	public @ResponseBody byte[] getImageWithMediaType(@PathVariable("url") String url) throws IOException{
-		InputStream in = getClass().getResourceAsStream(url);
-		return in.readAllBytes();
+	@RequestMapping(value="/getImageByUrl/{Id}",method=RequestMethod.GET,produces = MediaType.IMAGE_JPEG_VALUE)
+	public @ResponseBody byte[] getImageWithMediaType(@PathVariable("Id") int id) throws IOException{
+		List<Donation_Types> li=donationService.getAllDonationType();
+		Iterator i = li.iterator();
+		while(i.hasNext()) {
+			Donation_Types curDonationType = ((Donation_Types) i.next());
+			if(curDonationType.getId() == id) {
+				if(curDonationType.getImage_url() != null) {
+					return Files.readAllBytes(Paths.get(curDonationType.getImage_url()));
+				}
+			}
+		}
+		return null;
 	}
-
 }

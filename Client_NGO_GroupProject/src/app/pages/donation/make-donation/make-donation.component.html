@@ -1,17 +1,17 @@
-<mat-card style="width: 950px;margin:auto;">
+<mat-card style="width: 1050px;margin:auto;">
     <mat-card-title style="text-align: center;">
         <h3>GIFTS</h3>
     </mat-card-title>
     <mat-card-content style="margin:auto; width:100%">
-        <div style="width: 8rem;margin-left:700px">
+        <div style="width: 8rem;margin-left:850px">
             <p>
                 Check for Recurring Monthly Gift
             </p>
         </div>
         <div class="container" *ngFor="let form of formList | keyvalue">
             <form [formGroup]="form.value" class="row">
-                <div>
-                    {{ form.key.donation_types?.image_url}}
+                <div style="width:100px">
+                    <app-image [donationType]="form.key.donation_types"></app-image>
                 </div>
                 <div class="col-5 fw-bold">
                     <p>{{form.key.donation_types.type_name | uppercase}}</p>
@@ -22,7 +22,7 @@
                         <input type="number" matInput formControlName="amount">
                     </mat-form-field>
                 </div>
-                <div class="col-sm" *ngIf="form.key.donation_types.reoccurrence" style="margin-left: 100px;">
+                <div class="col-sm" *ngIf="form.key.donation_types.reoccurrence" style="margin-left: 50px;">
                     <mat-checkbox matInput formControlName="reoccuringDonation"></mat-checkbox>
                 </div>
             </form>

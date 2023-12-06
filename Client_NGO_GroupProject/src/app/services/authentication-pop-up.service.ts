@@ -13,8 +13,8 @@ export class AuthenticationPopUpService implements HttpInterceptor{
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
       return next.handle(request).pipe(catchError(err => {
-        console.log(err);
-          if ([401, 403, 0].includes(err.status)) {
+        console.log(request);
+          if ([401, 403].includes(err.status)) {
                 // auto logout if 401 or 403 response returned from api
             this.openPopUp();
           }

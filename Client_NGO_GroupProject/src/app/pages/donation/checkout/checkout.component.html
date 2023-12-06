@@ -15,7 +15,9 @@
                             <ng-container matColumnDef="Item Description">
                                 <th mat-header-cell *matHeaderCellDef>Donation Type</th>
                                 <td mat-cell *matCellDef="let donation">
-                                    {{donation.donation_types.type_name}}
+                                    {{donation.donation_types.type_name |uppercase}}
+                                    <app-image [donationType]="donation.donation_types"></app-image>
+                                    
                                 </td>
                             </ng-container>
                             <!-- -->

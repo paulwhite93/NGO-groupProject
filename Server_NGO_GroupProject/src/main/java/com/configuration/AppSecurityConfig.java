@@ -57,12 +57,16 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
             .disable()
             .authorizeRequests()
             .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-            .antMatchers("/authentication","/user/login","/user/register").permitAll()
+            .antMatchers("/authentication",
+            			"/user/login",
+            			"/user/register",            		     
+            			"/dono/getImageByUrl/*",
+            			"/dono/getImageByUrl").permitAll()
             .antMatchers("/dono/addDonation","/dono/addDonor").hasAuthority("user")
             .antMatchers("/user/display",           		     
             		     "/user/update",
             		     "/user/delete",
-            		     "dono/addDonationType",
+            		     "/dono/addDonationType",
             		     "/dono/display").hasAuthority("admin")      
             .anyRequest().authenticated();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
